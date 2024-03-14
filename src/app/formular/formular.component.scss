@@ -1,0 +1,101 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 77, 82, 0.1) linear-gradient(
+      to bottom,
+      #DC143C 0%,
+      #DC143C 20%,
+      rgba(175, 238, 238, 0) 20%,
+      rgba(175, 238, 238, 0) 100vh
+  ) no-repeat;
+  --mdc-filled-text-field-container-color: white;
+  --mat-form-field-subscript-text-size: 0.8rem;
+  //--mat-form-field-subscript-text-color: white;
+  --mdc-outlined-text-field-label-text-font: sans-serif;
+  //--mat-form-field-container-vertical-padding: 1px;
+  --mdc-outlined-text-field-outline-width: 3px;
+  --mdc-outlined-text-field-outline-color: rgba(0, 0, 0, 0.47);
+  //--mdc-outlined-text-field-hover-outline-color
+  --mdc-outlined-text-field-container-shape: 18px;
+  --mdc-outlined-text-field-focus-outline-width: 3px;
+
+}
+.col-md-auto{
+
+}
+
+.col-6{
+height: 5rem;
+  width: 70%;
+  margin-left: 20px;
+}
+.stepper{
+  margin-top: 10px;
+  height: 400px;
+  width: 900px;
+  overflow: hidden;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+  transition: box-shadow .28s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgb(218, 220, 224);
+  color: black ;
+}
+
+.back{
+  position: relative;
+  margin: auto; /* Zentrierung horizontal */
+  margin-top: 20vh;
+  width: 900px; /* Oder passend zur Seitenbreite anpassen */
+}
+
+.mat-step-header .mat-step-icon {
+  font-weight: initial;
+  background-color: rgb(218, 19, 24) !important; /* Ändere die Farbe der Icons auf Blau */
+}
+
+.containe{
+  height: 200px;
+  width: 900px;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+  transition: box-shadow .28s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgb(218, 220, 224);
+  color: black ;
+}
+
+.colored-top{
+  content: "";
+  top: -1px;
+  left: -3px;
+  width: calc(100% + 6px);
+  position: absolute;
+  height: 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: rgb(218, 19, 24); /* Farbe des oberen Teils */
+}
+.img{
+  transform: scale(3);
+  font-weight: bold;
+  color: rgba(5, 5, 5, 0.55);
+}
+
