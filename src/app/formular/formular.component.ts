@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {ErrorStateMatcher} from "@angular/material/core";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -21,5 +21,17 @@ export class FormularComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
+  kundeinformationen!: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+
+  ngOnInit(): void {
+    this.kundeinformationen = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required]
+    });
+  }
+
 }
 

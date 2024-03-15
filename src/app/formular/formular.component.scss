@@ -4,6 +4,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100vh;
+
   background: rgba(255, 77, 82, 0.1) linear-gradient(
       to bottom,
       #DC143C 0%,
@@ -22,7 +23,11 @@ body {
   --mdc-outlined-text-field-container-shape: 18px;
   --mdc-outlined-text-field-focus-outline-width: 3px;
 
+  --mat-stepper-container-text-font: Helvetica,-apple-system, Arial, san-serif, sans-serif;
+  --mat-stepper-header-label-text-font: -apple-system, Arial, san-serif, sans-serif;
+
 }
+
 .col-md-auto{
 
 }
@@ -33,10 +38,10 @@ height: 5rem;
   margin-left: 20px;
 }
 .stepper{
-  margin-top: 10px;
-  height: 400px;
+  margin-top: 5px;
+  height: 1000px;
   width: 900px;
-  overflow: hidden;
+
   border-radius: 8px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -65,7 +70,7 @@ height: 5rem;
 }
 
 .containe{
-  height: 200px;
+  height: 20em;
   width: 900px;
   border-radius: 8px;
   display: -webkit-box;
@@ -98,4 +103,6 @@ height: 5rem;
   font-weight: bold;
   color: rgba(5, 5, 5, 0.55);
 }
-
+.input{
+  margin-top: 1rem;
+}

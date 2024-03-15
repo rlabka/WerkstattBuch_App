@@ -7,7 +7,7 @@ import { FormularComponent } from './formular/formular.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTableModule} from "@angular/material/table";
@@ -17,6 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,10 @@ import {ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
     MatTableModule,
     MatDialogModule,
     MatStepLabel,
+    MatStepperPrevious,
+    MatStepperNext,
+    MatRadioGroup,
+    MatRadioButton,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
