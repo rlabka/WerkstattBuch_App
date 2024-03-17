@@ -1,0 +1,169 @@
+@switch (stepperOrientation | async) {
+  @case ('horizontal') {
+    <div>Make your screen smaller to see a vertical stepper</div>
+  }
+  @case ('vertical') {
+    <div>Make your screen larger to see a horizontal stepper</div>
+  }
+}
+
+<div class="stepper">
+  <mat-stepper [orientation]="(stepperOrientation | async)!">
+    <mat-step >
+      <form [formGroup]="kundeinformationen">
+        <ng-template  matStepLabel>Fill out your name</ng-template>
+        <ng-template matStepContent>
+          <div style="margin-top: 4%" class="container">
+          <div class="row d-flex align-content-center flex-wrap">
+            <div class="col ">
+              <div class="row justify-content-md-center flex-wrap">
+                <div class="col-6 ">
+                    <div class=" d-flex textbox justify-content-between flex-wrap">
+                      <div class="col-md-auto align-self-center">
+                        <mat-icon class="img">person</mat-icon>
+                      </div>
+                      <div class="input">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Vorname</mat-label>
+                          <input style="" matInput placeholder="Ihr Vorname" required>
+                        </mat-form-field>
+                      </div>
+                      <div class="input">
+                        <mat-form-field  appearance="outline">
+                          <mat-label>Nachname</mat-label>
+                          <input matInput  placeholder="Ihr Nachname" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div  class="container email">
+          <div class="row d-flex align-content-center">
+            <div class="col flex-wrap">
+              <div class="row justify-content-md-center">
+                <div class="col-6 ">
+                  <div class=" d-flex mail justify-content-between flex-wrap">
+                    <div class="col-md-auto">
+                      <mat-icon class="img">alternate_email</mat-icon>
+                    </div>
+
+                    <div class="input inputmaill" >
+                      <mat-form-field  class="mailinput" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                               placeholder="Bs. pat@example.com">
+                        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                          <mat-error>Bitte geben Sie eine gültige E-Mail-Adresse ein</mat-error>
+                        }
+                        @if (emailFormControl.hasError('required')) {
+                          <mat-error>Email ist <strong>erforderlich!</strong></mat-error>
+                        }
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="" class="container phone">
+          <div class="row d-flex align-content-center flex-wrap">
+            <div class="col ">
+              <div class="row justify-content-md-center flex-wrap">
+                <div class="col-6 ">
+                  <div  class="" >
+                    <div class=" d-flex justify-content-between flex-wrap ">
+                      <div class="col-md-auto align-self-center">
+                        <mat-icon class="img">smartphone</mat-icon>
+                      </div>
+
+                      <div class="input">
+                        <mat-form-field class="phoneinput" style="" appearance="outline">
+                          <mat-label>Phone number</mat-label>
+                          <span matTextPrefix style="padding-right: 15px">+49 &nbsp;</span>
+                          <input matInput type="tel" formControlName="tel"  required>
+                          <mat-icon style="color: #30b61b" matSuffix>phone</mat-icon>
+                          <mat-hint style="color: #DC143C; font-weight: bold; margin-top: 5px">z.B. +49123456789</mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="" class="container adresse">
+          <div class="row d-flex align-content-center">
+            <div class="col ">
+              <div class="row justify-content-md-center">
+                <div class="col-6 ">
+                  <div  class="" >
+                    <div class=" d-flex d-flex justify-content-between flex-wrap">
+                      <div class="col-md-auto align-self-center">
+                        <mat-icon class="img">share_location</mat-icon>
+                      </div>
+                      <div class="input">
+                        <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
+                          <mat-label>Adresse</mat-label>
+                          <mat-icon style="color: #1b3fb6; font-weight: bold" matSuffix>pin_drop</mat-icon>
+                          <input [matMenuTriggerFor]="menu" matInput type="adresse" formControlName="adresse"  required>
+                          <mat-hint style="color: #DC143C; font-weight: bold; margin-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
+                        </mat-form-field>
+                        <mat-menu class="menu"  #menu="matMenu">
+                          <div style="width: 17rem; height: 5rem; " mat-menu-item>Item 1</div>
+                        </mat-menu>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-right: -3.5em; margin-top: 7%" class="input d-flex justify-content-center">
+          <div style="margin-right: 1%;">
+            <mat-form-field appearance="outline">
+              <mat-label>Hausnummer</mat-label>
+              <input matInput type="number" formControlName="hausnummer"  required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>PLZ</mat-label>
+              <input matInput type="number" formControlName="plz"  required>
+            </mat-form-field>
+          </div>
+        </div>
+        </ng-template>
+      </form>
+    </mat-step>
+    <mat-step  label="Fill out your address">
+      <form >
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button >Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

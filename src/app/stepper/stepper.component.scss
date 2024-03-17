@@ -1,0 +1,104 @@
+.stepper{
+  margin-top: 5px;
+  height: auto;
+  width: 900px;
+  border-radius: 8px;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+  transition: box-shadow .28s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgb(218, 220, 224);
+  color: black ;
+}
+.col-6{
+  height: 5rem;
+  width: 70%;
+  margin-left: 20px;
+}
+
+.mat-step-header .mat-step-icon {
+  font-weight: initial;
+  background-color: rgb(109, 19, 218) !important; /* Ändere die Farbe der Icons auf Blau */
+}
+
+.menu{
+  margin-top: 2.5em !important;
+  padding: 0 !important;
+}
+
+.img{
+  transform: scale(3);
+  font-weight: bold;
+  color: rgba(5, 5, 5, 0.55);
+}
+
+.input{
+  margin-top: 1rem;
+}
+.email{
+  margin-top: 5%;
+}
+.phone{
+  margin-top: 6%;
+}
+.mailinput{
+  width: 20em;
+  margin-right: 10.9em;
+}
+.phoneinput{
+  width: 20em; margin-right: 10.9em;
+}
+
+.adresse{
+  margin-top: 6%; height: auto;
+}
+@media screen and (max-width: 800px) {
+  .img{
+    margin-top: 2rem;
+  }
+  .stepper{
+    max-width: 390px;
+  }
+  .email{
+    margin-top: 10rem;
+  }
+  .phone{
+    margin-top: 5rem;
+
+  }
+  .input{
+    margin-left: 1rem;
+    margin-top: 2rem;
+
+  }
+  .mail{
+    margin-top: 2rem;
+
+  }
+  .inputmaill{
+    margin-left: 0;
+
+  }
+  .adresse{
+    margin-top: 7rem;
+  }
+  .mail{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+
+  }
+  .phone{
+    margin-top: 8rem;
+
+  }
+  .mailinput{
+
+    width: 18rem;
+  }
+  .phoneinput{
+    width: 15rem;
+  }
+
+}

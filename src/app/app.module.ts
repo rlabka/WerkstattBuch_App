@@ -7,7 +7,14 @@ import { FormularComponent } from './formular/formular.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
+import {
+    MatStep,
+    MatStepContent,
+    MatStepLabel,
+    MatStepper,
+    MatStepperNext,
+    MatStepperPrevious
+} from "@angular/material/stepper";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatTableModule} from "@angular/material/table";
@@ -18,33 +25,40 @@ import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
 import {ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import { StepperComponent } from './stepper/stepper.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent,FormularComponent
+    AppComponent,FormularComponent, StepperComponent, AdminPageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    MatIcon,
-    MatStep,
-    MatStepper,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatTableModule,
-    MatDialogModule,
-    MatStepLabel,
-    MatStepperPrevious,
-    MatStepperNext,
-    MatRadioGroup,
-    MatRadioButton,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MatIcon,
+        MatStep,
+        MatStepper,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatTableModule,
+        MatDialogModule,
+        MatStepLabel,
+        MatStepperPrevious,
+        MatStepperNext,
+        MatRadioGroup,
+        MatRadioButton,
+        MatMenuTrigger,
+        MatMenu,
+        MatMenuItem,
+        MatStepContent,
+    ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
   ],

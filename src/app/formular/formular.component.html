@@ -1,161 +1,20 @@
-<div class="back">
-  <div class="containe">
-    <div class="colored-top">
-    </div>
-    <div class="remaining-content">
+<header style=" " class="header">
+  <div style=" padding: 20px" class="container">
+    <div class="logo">
+      logo
     </div>
   </div>
-  <div class="stepper">
-    <mat-stepper #stepper>
-      <mat-step >
-        <form [formGroup]="kundeinformationen">
-          <ng-template  matStepLabel>Fill out your name</ng-template>
-
-          <div style="margin-top: 4%" class="container">
-            <div class="row d-flex align-content-center">
-              <div class="col ">
-                <div class="row justify-content-md-center">
-                  <div class="col-6 ">
-                    <div  class="" >
-                      <div class=" d-flex justify-content-between">
-                        <div class="col-md-auto align-self-center">
-                          <mat-icon class="img">person</mat-icon>
-                        </div>
-                        <div class="input">
-                          <mat-form-field appearance="outline">
-                            <mat-label>Vorname</mat-label>
-                            <input matInput placeholder="Ihr Vorname" required>
-                          </mat-form-field>
-                        </div>
-                        <div class="input">
-                          <mat-form-field appearance="outline">
-                            <mat-label>Nachname</mat-label>
-                            <input matInput placeholder="Ihr Nachname" required>
-                          </mat-form-field>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        <div style="margin-top: 5%" class="container">
-          <div class="row d-flex align-content-center">
-            <div class="col ">
-              <div class="row justify-content-md-center">
-                <div class="col-6 ">
-                    <div class=" d-flex justify-content-between">
-                      <div class="col-md-auto align-self-center">
-                        <mat-icon class="img">alternate_email</mat-icon>
-                      </div>
-
-                      <div class="input " >
-                        <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
-                          <mat-label>Email</mat-label>
-                          <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                                 placeholder="Bs. pat@example.com">
-                          @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
-                            <mat-error>Bitte geben Sie eine gültige E-Mail-Adresse ein</mat-error>
-                          }
-                          @if (emailFormControl.hasError('required')) {
-                            <mat-error>Email ist <strong>erforderlich!</strong></mat-error>
-                          }
-                        </mat-form-field>
-                      </div>
-                    </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          <div style="margin-top: 6%" class="container">
-            <div class="row d-flex align-content-center">
-              <div class="col ">
-                <div class="row justify-content-md-center">
-                  <div class="col-6 ">
-                    <div  class="" >
-                      <div class=" d-flex justify-content-between">
-                        <div class="col-md-auto align-self-center">
-                          <mat-icon class="img">smartphone</mat-icon>
-                        </div>
-
-                        <div class="input">
-                          <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
-                            <mat-label>Phone number</mat-label>
-                            <span matTextPrefix style="padding-right: 15px">+49 &nbsp;</span>
-                            <input matInput type="tel" formControlName="tel"  required>
-                            <mat-icon matSuffix>phone</mat-icon>
-                            <mat-hint style="color: #DC143C; font-weight: bold; margin-top: 5px">z.B. +49123456789</mat-hint>
-                          </mat-form-field>
-                        </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top: 5%" class="container">
-            <div class="row d-flex align-content-center">
-              <div class="col ">
-                <div class="row justify-content-md-center">
-                  <div class="col-6 ">
-                    <div  class="" >
-                      <div class=" d-flex justify-content-between">
-                        <div class="col-md-auto align-self-center">
-                          <mat-icon class="img">share_location</mat-icon>
-                        </div>
-                        <div class="input">
-                          <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
-                            <mat-label>Adresse</mat-label>
-
-                            <input matInput type="tel" formControlName="tel"  required>
-                            <mat-hint style="color: #DC143C; font-weight: bold; margin-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
-                          </mat-form-field>
-                        </div>
-                        <div class="input">
-                          <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
-                            <mat-label>Phone number</mat-label>
-                            <input matInput type="number" formControlName="hausnummer"  required>
-                          </mat-form-field>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-        <p>TTTEST</p>
-      </mat-step>
-      <mat-step  label="Fill out your address">
-        <form >
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button >Reset</button>
-        </div>
-      </mat-step>
-    </mat-stepper>
-
+</header>
+<div style="display:flex; flex-direction: column; justify-content: center; align-items: center;justify-items: center" class="">
+    <div class="containe">
+      <div class="colored-top">
+      </div>
+      <div style="margin-top: 3em" class="remaining-content">
+        Test Test
+      </div>
+    </div>
+  <div style="margin-top: 3em">
+    <app-stepper></app-stepper>
   </div>
 </div>
+
