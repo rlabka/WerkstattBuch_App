@@ -3,9 +3,7 @@
   height: auto;
   width: 900px;
   border-radius: 8px;
-  flex-direction: column;
   background-color: #fff;
-  position: relative;
   transition: box-shadow .28s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgb(218, 220, 224);
   color: black ;
@@ -18,12 +16,15 @@
 
 .mat-step-header .mat-step-icon {
   font-weight: initial;
-  background-color: rgb(109, 19, 218) !important; /* Ändere die Farbe der Icons auf Blau */
+  background-color: rgb(109, 19, 218) !important;
 }
 
 .menu{
-  margin-top: 2.5em !important;
+  margin-top: 1.2em !important;
+  position: fixed !important;
   padding: 0 !important;
+  border-radius:0 0 17px 17px !important;
+  max-height: 6rem !important;
 }
 
 .img{
@@ -31,74 +32,121 @@
   font-weight: bold;
   color: rgba(5, 5, 5, 0.55);
 }
+.btnimg{
+  transform: scale(1.6);
+  font-weight: bold;
+  //color: #ffffff;
+  margin-left: 10px;
+  color: rgb(109, 19, 218) !important;
+  //border-radius: 17px;
+}
 
 .input{
   margin-top: 1rem;
 }
 .email{
+
   margin-top: 5%;
 }
 .phone{
   margin-top: 6%;
 }
+.inputmaill{
+
+  align-self: center;
+}
 .mailinput{
   width: 20em;
   margin-right: 10.9em;
 }
+.nachname{
+}
+
 .phoneinput{
   width: 20em; margin-right: 10.9em;
 }
 
 .adresse{
-  margin-top: 6%; height: auto;
+  margin-top: 6%;
+  height: 20rem;
 }
+.person{
+  margin-top: 4%;
+}
+
+
 @media screen and (max-width: 800px) {
+
   .img{
     margin-top: 2rem;
+  }
+  .person{
+    margin-top: 0;
+  }
+  .flexcol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .stepper{
     max-width: 390px;
   }
   .email{
-    margin-top: 10rem;
+    margin-top: 9rem;
   }
   .phone{
-    margin-top: 5rem;
-
+    margin-top: 4rem;
+    margin-left: 0;
+    margin-right: 0;
   }
   .input{
     margin-left: 1rem;
-    margin-top: 2rem;
-
+    margin-top: 1rem;
   }
   .mail{
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 
   }
   .inputmaill{
+    align-self: flex-start;
     margin-left: 0;
 
   }
+
+  .phoneicon{
+    align-self: flex-end;
+  }
   .adresse{
-    margin-top: 7rem;
+    margin-top: 6rem;
+    height: 20rem;
   }
   .mail{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
-
   }
   .phone{
-    margin-top: 8rem;
+
 
   }
   .mailinput{
 
-    width: 18rem;
+    width: 16rem;
   }
   .phoneinput{
-    width: 15rem;
+    width: 16rem;
+  }
+  *, ::after, ::before {
+    box-sizing: unset;
+  }
+  .inputadresse{
+    margin-left: -40px;
+  }
+  .personicon{
+    margin-left: 0.9rem;
+  }
+  .img{
+    transform: scale(2);
   }
 
 }
