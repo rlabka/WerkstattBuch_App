@@ -1,17 +1,15 @@
 @switch (stepperOrientation | async) {
   @case ('horizontal') {
-    <div>Make your screen smaller to see a vertical stepper</div>
   }
   @case ('vertical') {
-    <div>Make your screen larger to see a horizontal stepper</div>
   }
 }
 
 <div class="stepper">
-  <mat-stepper [orientation]="(stepperOrientation | async)!">
-    <mat-step >
+  <mat-stepper [linear]="isLinear" [orientation]="(stepperOrientation | async)!">
+    <mat-step [stepControl]="kundeinformationen">
       <form [formGroup]="kundeinformationen">
-        <ng-template  matStepLabel>Fill out your name</ng-template>
+        <ng-template  matStepLabel>Persönliche Daten</ng-template>
         <ng-template matStepContent>
           <div  class="container person">
           <div class="row d-flex align-content-center ">
@@ -26,13 +24,13 @@
                       <div class="input">
                         <mat-form-field appearance="outline">
                           <mat-label>Vorname</mat-label>
-                          <input style="" matInput placeholder="Ihr Vorname" required>
+                          <input style=""  type="firstName" formControlName="firstName" matInput placeholder="Ihr Vorname" required>
                         </mat-form-field>
                       </div>
                       <div class="input">
                         <mat-form-field appearance="outline">
                           <mat-label>Nachname</mat-label>
-                          <input matInput  placeholder="Ihr Nachname" required>
+                          <input matInput type="lastname" formControlName="lastName" placeholder="Ihr NachName" required>
                         </mat-form-field>
                       </div>
                     </div>
@@ -55,8 +53,8 @@
                     <div   class="input inputmaill" >
                       <mat-form-field  class="mailinput" appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                               placeholder="Bs. pat@example.com">
+                        <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" type="email"
+                               placeholder="z.B. pat@example.com" required>
                         @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
                           <mat-error>Bitte geben Sie eine gültige E-Mail-Adresse ein</mat-error>
                         }
@@ -91,7 +89,7 @@
                           <span matTextPrefix style="padding-right: 15px">+49 &nbsp;</span>
                           <input matInput type="tel" formControlName="tel"  required>
                           <mat-icon style="color: #30b61b" matSuffix>phone</mat-icon>
-                          <mat-hint style="color: #DC143C; font-weight: bold; margin-top: 5px">z.B. +49123456789</mat-hint>
+                          <mat-hint style="color: #DC143C; font-weight: 500; margin-top: 5px">z.B. +49123456789</mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
@@ -107,44 +105,69 @@
               <div class="col">
                 <div class="row justify-content-md-center">
                   <div class="col-6 ">
-                    <div style="align-self: center" class=" d-flex mail justify-content-md-between flex-sm-wrap">
+                    <div style="align-self: center" class=" d-flex mail justify-content-md-between flex-sm-wrap flex-md-nowrap">
 
                       <div class=" col-md-auto align-self-center">
                         <mat-icon class="img">share_location</mat-icon>
                       </div>
 
-                      <div style=" "  class="input inputmaill inputadresse" >
-                        <mat-form-field style="width: 20em; margin-right: 10.9em" appearance="outline">
-                          <mat-label>Adresse</mat-label>
-                          <input [matMenuTriggerFor]="menu" matInput type="adresse" formControlName="adresse"  required>
-                          <mat-hint style="color: #DC143C; font-weight: bold; padding-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
-                        </mat-form-field>
+                      <div style="display: flex; margin-left: 53px"  class="input flex-md-wrap gap-3 inputmaill inputadresse" >
+                        <div>
+                          <mat-form-field style="width: 20em; " appearance="outline">
+                            <mat-label>Adresse</mat-label>
+                            <input [matMenuTriggerFor]="menu" matInput type="adresse" formControlName="adresse"  required>
+                            <mat-hint style="color: #DC143C; font-weight: 500; padding-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field style="width: 7em; " appearance="outline">
+                            <mat-label>Haus Nr</mat-label>
+                            <input matInput type="hausnummer" formControlName="hausnummer"  >
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field style="width: 6em; margin-top: 20px" appearance="outline">
+                            <mat-label>PLZ</mat-label>
+                            <input matInput type="plz" formControlName="plz" >
+                          </mat-form-field>
+                        </div>
+                        <div style="margin-top: 20px">
+                          <mat-form-field style="width: 8em;" appearance="outline">
+                            <mat-label>Stadt</mat-label>
+                            <input matInput type="stadt" formControlName="stadt">
+                          </mat-form-field>
+                        </div>
+
+
                         <mat-menu class="menu" style=""  #menu="matMenu">
                           <div>
-                            <button style="width: 17rem; height: 3rem; font-size: 1.3rem " mat-icon-button>
+                            <button class="btn btn-light" style="width: 15.8rem; height: 3.2rem; font-size: 1.3rem; color: rgba(5, 5, 5, 0.55); ">
                               <div style="display: flex; flex-direction: row; justify-content: space-between; align-content:space-between">
                                 <div>
                                   <mat-icon class="btnimg">assistant_navigation</mat-icon>
                                 </div>
                                 <div>
-                                  <span style="margin-right: 30px">Mein Standort</span>
+                                  <span style="margin-right: 30px; font-family: Roboto,'Madimi One',sans-serif; font-weight: 400; font-style: normal; font-size: 17px">Mein Standort</span>
                                 </div>
                               </div>
-
                             </button>
                           </div>
                         </mat-menu>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
+
+          </div>
+          <div>
+            <button mat-button matStepperNext>Nächste Schritt</button>
           </div>
         </ng-template>
       </form>
     </mat-step>
+
     <mat-step  label="Fill out your address">
       <form >
         <div>
@@ -153,6 +176,8 @@
         </div>
       </form>
     </mat-step>
+
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>

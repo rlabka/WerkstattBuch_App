@@ -28,37 +28,41 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import { StepperComponent } from './stepper/stepper.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import {NgOptimizedImage} from "@angular/common";
+import {MatTabLabel} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
     AppComponent,FormularComponent, StepperComponent, AdminPageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        MatIcon,
-        MatStep,
-        MatStepper,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatTableModule,
-        MatDialogModule,
-        MatStepLabel,
-        MatStepperPrevious,
-        MatStepperNext,
-        MatRadioGroup,
-        MatRadioButton,
-        MatMenuTrigger,
-        MatMenu,
-        MatMenuItem,
-        MatStepContent,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatIcon,
+    MatStep,
+    MatStepper,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule,
+    MatDialogModule,
+    MatStepLabel,
+    MatStepperPrevious,
+    MatStepperNext,
+    MatRadioGroup,
+    MatRadioButton,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    MatStepContent,
+    NgOptimizedImage,
+    MatTabLabel,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
   ],

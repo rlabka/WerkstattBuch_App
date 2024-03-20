@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background: rgba(255, 77, 82, 0.1) no-repeat;
+  background: rgba(220, 20, 60, 0.1) no-repeat;
 
   --mdc-filled-text-field-container-color: white;
   --mat-form-field-subscript-text-size: 0.8rem;
@@ -21,14 +21,11 @@ body {
 
 }
 
-
-
-
 .containe{
-  height: 20em;
+  height: 500px;
   width: 900px;
-  margin-top: 1em;
-  border-radius: 8px;
+  margin-top: -30px;
+  border-radius: 14px;
   flex-direction: column;
   background-color: #fff;
   position: relative;
@@ -37,7 +34,22 @@ body {
   color: black ;
 }
 .header{
-  height: 20%; width: auto;  background-color: #DC143C;
+  height: 11rem; width: auto;
+  background-color: #DC143C !important;
+}
+.text-border{
+  font-family: 'Madimi One',sans-serif; font-style: normal;
+  -webkit-text-stroke: 1px black; /* WebKit-basierte Browser */
+  text-shadow: 0 0 1px black;
+  padding: 3px;
+}
+
+.title{
+  margin-top: 10px;
+  font-family: "Kranky","Comic Sans MS",sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  font-style: normal;
 }
 .colored-top{
   content: "";

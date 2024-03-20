@@ -14,15 +14,14 @@ import {MatMenuTrigger} from "@angular/material/menu";
 })
 export class StepperComponent {
 
-
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
   kundeinformationen!: FormGroup;
-  stepperOrientation: Observable<StepperOrientation>;
+  stepperOrientation: any;
+  isLinear= true;
 
-
-  constructor(private formBuilder: FormBuilder,    breakpointObserver: BreakpointObserver,
+  constructor(private formBuilder: FormBuilder,    breakpointObserver: BreakpointObserver, private _formBuilder: FormBuilder
   ) {
 
     this.stepperOrientation = breakpointObserver
@@ -35,11 +34,12 @@ export class StepperComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       tel: ['', Validators.required],
+      email: this.emailFormControl,
       adresse: ['',Validators.required],
       hausnummer: ['', Validators.required],
-      plz: ['',Validators.required]
+      plz: ['',Validators.required],
+      stadt: ['',Validators.required],
     });
-
 
   }
 

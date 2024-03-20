@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Formular_Service.iml" filepath="$PROJECT_DIR$/.idea/Formular_Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ServicesMayono.iml" filepath="$PROJECT_DIR$/.idea/ServicesMayono.iml" />
     </modules>
   </component>
 </project>

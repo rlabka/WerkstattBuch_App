@@ -1,5 +1,6 @@
 .stepper{
-  margin-top: 5px;
+  margin-top: 0;
+  overflow: hidden !important;
   height: auto;
   width: 900px;
   border-radius: 8px;
@@ -16,15 +17,14 @@
 
 .mat-step-header .mat-step-icon {
   font-weight: initial;
-  background-color: rgb(109, 19, 218) !important;
 }
 
 .menu{
   margin-top: 1.2em !important;
   position: fixed !important;
   padding: 0 !important;
-  border-radius:0 0 17px 17px !important;
-  max-height: 6rem !important;
+  border-radius:2px 2px 25px 25px !important;
+  max-height: 7rem !important;
 }
 
 .img{
@@ -45,11 +45,10 @@
   margin-top: 1rem;
 }
 .email{
-
-  margin-top: 5%;
+  margin-top: 2%;
 }
 .phone{
-  margin-top: 6%;
+  margin-top: 2%;
 }
 .inputmaill{
 
@@ -67,11 +66,11 @@
 }
 
 .adresse{
-  margin-top: 6%;
-  height: 20rem;
+  margin-top: 3%;
+  height: 14rem;
 }
 .person{
-  margin-top: 4%;
+  margin-top: 2%;
 }
 
 
@@ -146,7 +145,7 @@
     margin-left: 0.9rem;
   }
   .img{
-    transform: scale(2);
+    transform: scale(1.8);
   }
 
 }
