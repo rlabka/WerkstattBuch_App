@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background: rgba(220, 20, 60, 0.1) no-repeat;
+  background: rgba(255, 235, 238, 0.62) no-repeat;
 
   --mdc-filled-text-field-container-color: white;
   --mat-form-field-subscript-text-size: 0.8rem;
@@ -13,7 +13,7 @@ body {
   --mdc-outlined-text-field-outline-width: 3px;
   --mdc-outlined-text-field-outline-color: rgba(0, 0, 0, 0.47);
   //--mdc-outlined-text-field-hover-outline-color
-  --mdc-outlined-text-field-container-shape: 18px;
+  --mdc-outlined-text-field-container-shape: 8px;
   --mdc-outlined-text-field-focus-outline-width: 3px;
 
   --mat-stepper-container-text-font: Helvetica,-apple-system, Arial, san-serif, sans-serif;
@@ -43,6 +43,14 @@ body {
   text-shadow: 0 0 1px black;
   padding: 3px;
 }
+.beschreibung{
+  padding: 0 1em 0 2em;
+  margin-top: 3em;
+  color: #6c6c6c;
+  font-size: 17px;
+  line-height: 25px;
+  letter-spacing: 0.5px;
+}
 
 .title{
   margin-top: 10px;
@@ -71,12 +79,21 @@ body {
   margin-top: 1rem;
 }
 @media screen and (max-width: 800px) {
-
+  .beschreibung{
+    width: 96%;
+    padding: 2px;
+  }
+  .remaining-content{
+    padding: 0 20px 0 20px;
+  }
+  .title{
+   line-height: 40px;
+  }
   .containe{
-    height: 15em;
+    height: auto;
     width: 100%;
   }
   .header{
-    height: 15%;
+    height: auto;
   }
 }

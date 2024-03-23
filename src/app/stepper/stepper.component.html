@@ -8,7 +8,7 @@
 <div class="stepper">
   <mat-stepper [linear]="isLinear" [orientation]="(stepperOrientation | async)!">
     <mat-step [stepControl]="kundeinformationen">
-      <form [formGroup]="kundeinformationen">
+      <form [formGroup]="kundeinformationen" #myForm="ngForm">
         <ng-template  matStepLabel>Persönliche Daten</ng-template>
         <ng-template matStepContent>
           <div  class="container person">
@@ -21,14 +21,14 @@
                         <mat-icon class="img">person</mat-icon>
                       </div>
 
-                      <div class="input">
-                        <mat-form-field appearance="outline">
+                      <div style="margin-right: 17px" class="input ">
+                        <mat-form-field class="personinput" appearance="outline">
                           <mat-label>Vorname</mat-label>
                           <input style=""  type="firstName" formControlName="firstName" matInput placeholder="Ihr Vorname" required>
                         </mat-form-field>
                       </div>
-                      <div class="input">
-                        <mat-form-field appearance="outline">
+                      <div class="input ">
+                        <mat-form-field class="personinput"  appearance="outline">
                           <mat-label>Nachname</mat-label>
                           <input matInput type="lastname" formControlName="lastName" placeholder="Ihr NachName" required>
                         </mat-form-field>
@@ -40,17 +40,18 @@
           </div>
         </div>
 
-        <div  class="container email">
+        <div style="" class="container email">
           <div class="row d-md-flex align-content-md-center">
             <div class="col">
               <div class="row justify-content-md-center">
                 <div class="col-6 ">
                   <div style="align-self: center" class=" d-flex mail justify-content-md-between gap-sm-0 flex-sm-wrap">
+
                     <div class=" col-md-auto align-self-center">
                       <mat-icon class="img">alternate_email</mat-icon>
                     </div>
 
-                    <div   class="input inputmaill" >
+                    <div  class="input inputmaill" >
                       <mat-form-field  class="mailinput" appearance="outline">
                         <mat-label>Email</mat-label>
                         <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" type="email"
@@ -100,39 +101,39 @@
             </div>
           </div>
 
-          <div  class="container adresse">
+          <div style=""  class="container adresse">
             <div class="row d-md-flex align-content-md-center">
               <div class="col">
                 <div class="row justify-content-md-center">
                   <div class="col-6 ">
                     <div style="align-self: center" class=" d-flex mail justify-content-md-between flex-sm-wrap flex-md-nowrap">
 
-                      <div class=" col-md-auto align-self-center">
+                      <div class="adresseimg col-md-auto align-self-center">
                         <mat-icon class="img">share_location</mat-icon>
                       </div>
 
-                      <div style="display: flex; margin-left: 53px"  class="input flex-md-wrap gap-3 inputmaill inputadresse" >
-                        <div>
+                      <div style="display: flex;"  class="input flex flex-wrap gap-3 inputmaill inputadresse" >
+                        <div >
                           <mat-form-field style="width: 20em; " appearance="outline">
                             <mat-label>Adresse</mat-label>
                             <input [matMenuTriggerFor]="menu" matInput type="adresse" formControlName="adresse"  required>
                             <mat-hint style="color: #DC143C; font-weight: 500; padding-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
                           </mat-form-field>
                         </div>
-                        <div>
-                          <mat-form-field style="width: 7em; " appearance="outline">
+                        <div class="">
+                          <mat-form-field class="hausnr" appearance="outline">
                             <mat-label>Haus Nr</mat-label>
                             <input matInput type="hausnummer" formControlName="hausnummer"  >
                           </mat-form-field>
                         </div>
-                        <div>
-                          <mat-form-field style="width: 6em; margin-top: 20px" appearance="outline">
+                        <div class="align-self-end align-self-auto">
+                          <mat-form-field class="plz" appearance="outline">
                             <mat-label>PLZ</mat-label>
                             <input matInput type="plz" formControlName="plz" >
                           </mat-form-field>
                         </div>
-                        <div style="margin-top: 20px">
-                          <mat-form-field style="width: 8em;" appearance="outline">
+                        <div class=" stadt align-self-end">
+                          <mat-form-field style="width: 10em;" appearance="outline">
                             <mat-label>Stadt</mat-label>
                             <input matInput type="stadt" formControlName="stadt">
                           </mat-form-field>
@@ -159,17 +160,57 @@
                 </div>
               </div>
             </div>
-
           </div>
-          <div>
-            <button mat-button matStepperNext>Nächste Schritt</button>
+          <div class="d-flex gap-5 align-content-center service">
+            <div class="align-self-center">
+              <mat-icon class="img">no_crash</mat-icon>
+            </div>
+            <div  class="selectedservice" >
+              <mat-chip-listbox (change)="onSelectionChange($event)">
+                <mat-chip-option [value]="option1" color="accent" selected>Räderwechseln</mat-chip-option>
+                <mat-chip-option [value]="option2" color="accent">Reifenwechseln</mat-chip-option>
+              </mat-chip-listbox>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+            <button mat-raised-button color="primary" style="height: 50px;width: 200px" class="btn" matStepperNext>Nächste Schritt</button>
           </div>
         </ng-template>
       </form>
     </mat-step>
 
-    <mat-step  label="Fill out your address">
-      <form >
+    <!----------------- stepper 2------------------->
+
+    <mat-step  label="Fahrzeuginformationen">
+      <form [formGroup]="autoinformationen" >
+        <div class="container d-flex input flex-wrap justify-content-evenly align-items-md-center align-content-center">
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Fahrzeugart</mat-label>
+              <input  matInput type="fahrzeugart" formControlName="fahrzeugtyp">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+             <mat-label>Automarke</mat-label>
+              <input  matInput type="automarke" formControlName="automarke">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Reifengrößen</mat-label>
+              <input  matInput type="reifen" formControlName="reifen">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Räderart</mat-label>
+              <input  matInput type="rad" formControlName="rad">
+            </mat-form-field>
+          </div>
+
+        </div>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -177,14 +218,81 @@
       </form>
     </mat-step>
 
+    <!----------------- stepper 3------------------->
 
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <ng-template matStepLabel>Terminauswahl</ng-template>
+      <div class="container d-flex flex-column align-items-center">
+        <div style="padding-top: 15px" class="d-flex justify-content-center">
+          <mat-form-field style="width: 20rem"  class="input" appearance="outline">
+            <mat-label>Wählen Sie ein Datum aus</mat-label>
+            <input disabled matInput [min]="currentTime" [matDatepicker]="picker" (dateChange)="getDate($event)" required>
+            <mat-hint style="color: #DC143C; font-weight: 500; margin-top: 5px">TT.MM.JJJJ</mat-hint>
+            <mat-datepicker-toggle disabled="false" style="color: #1b3fb6" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker disabled="false" #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        @if (aktiveTermin){
+          <div class="termincontainer" style="content: initial; min-height: 15rem; max-width: 30rem; margin-top: 15px;">
+            <mat-card class="shadow-sm p-3 mb-5 bg-light rounded" style="height: 100%">
+              <mat-card-header>
+                <mat-card-title>Wählen Sie eine Uhrzeit aus</mat-card-title>
+              </mat-card-header>
+              <mat-card-content style="margin-top: 20px;">
+                <mat-chip-listbox (change)="onSelectionChange($event)">
+                  <mat-chip-option color="accent" >9:30</mat-chip-option>
+                  <mat-chip-option color="accent" >10:00</mat-chip-option>
+                  <mat-chip-option color="accent" >11:00</mat-chip-option>
+                  <mat-chip-option color="accent" >12:00</mat-chip-option>
+                </mat-chip-listbox>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+        }
+      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button >Reset</button>
       </div>
+    </mat-step>
+
+    <!----------------- stepper 4------------------->
+
+    <mat-step  label="Fahrzeuginformationen">
+      <form [formGroup]="autoinformationen" >
+        <div class="container d-flex input flex-wrap justify-content-evenly align-items-md-center align-content-center">
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Fahrzeugart</mat-label>
+              <input  matInput type="fahrzeugart" formControlName="fahrzeugtyp">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Automarke</mat-label>
+              <input  matInput type="automarke" formControlName="automarke">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Reifengrößen</mat-label>
+              <input  matInput type="reifen" formControlName="reifen">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Räderart</mat-label>
+              <input  matInput type="rad" formControlName="rad">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
     </mat-step>
   </mat-stepper>
 </div>

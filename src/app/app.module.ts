@@ -7,6 +7,7 @@ import { FormularComponent } from './formular/formular.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
+
 import {
     MatStep,
     MatStepContent,
@@ -23,15 +24,25 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
-import {ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import { StepperComponent } from './stepper/stepper.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import {MatTabLabel} from "@angular/material/tabs";
+import {MatChipListbox, MatChipOption, MatChipRemove} from "@angular/material/chips";
+import {MatSelectTrigger} from "@angular/material/select";
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
+import {MatDivider} from "@angular/material/divider";
 
 @NgModule({
+
   declarations: [
     AppComponent,FormularComponent, StepperComponent, AdminPageComponent
   ],
@@ -62,10 +73,26 @@ import {MatTabLabel} from "@angular/material/tabs";
     MatStepContent,
     NgOptimizedImage,
     MatTabLabel,
+    MatChipListbox,
+    MatChipOption,
+    MatChipRemove,
+    MatSelectTrigger,
+    MatDatepicker,
+    MatDatepickerToggle,
+    MatDatepickerInput,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDivider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'de' }
   ],
   bootstrap: [AppComponent],
+
 })
-export class AppModule { }
+export class AppModule {
+
+}
