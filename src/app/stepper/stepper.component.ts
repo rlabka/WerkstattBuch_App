@@ -7,6 +7,8 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {MatChipSelectionChange} from "@angular/material/chips";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import {style} from "@angular/animations";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-stepper',
@@ -27,6 +29,10 @@ export class StepperComponent {
   option2: any;
   currentTime:Date;
   aktiveTermin=false;
+
+  formGroup = this._formBuilder.group({
+    acceptTerms: ['', Validators.requiredTrue],
+  });
 
   constructor(private formBuilder: FormBuilder,    breakpointObserver: BreakpointObserver, private _formBuilder: FormBuilder
   ) {
@@ -67,4 +73,14 @@ export class StepperComponent {
     console.log('Selected value:', selectedValue);
   }
 
+  protected readonly style = style;
+
+  confirmed() {
+    Swal.fire({
+      title: 'Vielen Dank für Ihre Anfrage!',
+      text: 'Wir haben Ihre Anfrage erhalten und werden uns innerhalb der nächsten 10 Minuten bei Ihnen melden, um Ihren Auftrag zu bestätigen. Wir freuen uns darauf, Ihnen weiterzuhelfen!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    })
+  }
 }

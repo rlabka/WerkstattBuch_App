@@ -24,7 +24,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
-import {MAT_DATE_LOCALE, MatNativeDateModule, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import { StepperComponent } from './stepper/stepper.component';
@@ -32,7 +32,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import {MatTabLabel} from "@angular/material/tabs";
 import {MatChipListbox, MatChipOption, MatChipRemove} from "@angular/material/chips";
-import {MatSelectTrigger} from "@angular/material/select";
+import {MatSelect, MatSelectTrigger} from "@angular/material/select";
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -40,6 +40,7 @@ import {
   MatDatepickerToggle
 } from "@angular/material/datepicker";
 import {MatDivider} from "@angular/material/divider";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
 
 @NgModule({
 
@@ -84,7 +85,10 @@ import {MatDivider} from "@angular/material/divider";
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDivider
+    MatDivider,
+    MatSlideToggle,
+    MatSelect,
+    MatOption
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

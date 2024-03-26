@@ -14,10 +14,27 @@
   width: 70%;
   margin-left: 20px;
 }
+
 .mat-step-text-label{
- font-weight: 500 !important;
-  font-family: sans-serif;
+
+  font-weight: 400;
+  font-family: Roboto,"Comic Sans MS",sans-serif !important;
 }
+.mat-step-header{
+  background: transparent !important;
+}
+.mat-step-header :active{
+  background: transparent !important;
+}
+.mat-step-header[aria-selected="true"] .mat-step-label{
+  color: #311B92 !important;
+  font-weight: 500;
+  background: transparent !important;
+}
+.mat-step-header .mat-step-label:active {
+  background-color: black;
+}
+
 
 .mat-step-header .mat-step-icon {
   font-weight: initial;

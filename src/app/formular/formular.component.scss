@@ -34,7 +34,7 @@ body {
   color: black ;
 }
 .header{
-  height: 11rem; width: auto;
+  height: 12rem; width: auto;
   background-color: #DC143C !important;
 }
 .text-border{
@@ -95,5 +95,8 @@ body {
   }
   .header{
     height: auto;
+  }
+  .footerdiv{
+    margin-left: 0 !important;
   }
 }
