@@ -90,7 +90,7 @@
                           <span matTextPrefix style="padding-right: 15px">+49 &nbsp;</span>
                           <input matInput type="tel" formControlName="tel"  required>
                           <mat-icon style="color: #30b61b" matSuffix>phone</mat-icon>
-                          <mat-hint style="color: #DC143C; font-weight: 500; margin-top: 5px">z.B. +49123456789</mat-hint>
+                          <mat-hint style="color: #6E00CA; font-weight: 500; margin-top: 5px">z.B. +49123456789</mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
@@ -117,7 +117,7 @@
                           <mat-form-field style="width: 20em; " appearance="outline">
                             <mat-label>Adresse</mat-label>
                             <input [matMenuTriggerFor]="menu" matInput type="adresse" formControlName="adresse"  required>
-                            <mat-hint style="color: #DC143C; font-weight: 500; padding-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
+                            <mat-hint style="color: #6E00CA; font-weight: 500; padding-top: 5px">Bitte geben Sie die Standortadresse Ihres Autos ein!</mat-hint>
                           </mat-form-field>
                         </div>
                         <div class="">
@@ -142,7 +142,7 @@
 
                         <mat-menu class="menu" style=""  #menu="matMenu">
                           <div>
-                            <button class="btn btn-light" style="width: 15.8rem; height: 3.2rem; font-size: 1.3rem; ">
+                            <button class="btn btn-light" style="width: 16rem; height: 3.2rem; font-size: 1.3rem;" (click)="getPosition()">
                               <div class="rounded-circle" style="display: flex; flex-direction: row; justify-content: space-between; align-content:space-between">
                                 <div>
                                   <mat-icon class="btnimg">assistant_navigation</mat-icon>
@@ -165,10 +165,10 @@
             <div class="align-self-center">
               <mat-icon class="img">no_crash</mat-icon>
             </div>
-            <div  class="selectedservice" >
-              <mat-chip-listbox (change)="onSelectionChange($event)">
-                <mat-chip-option [value]="option1" color="accent" selected>Räderwechseln</mat-chip-option>
-                <mat-chip-option [value]="option2" color="accent">Reifenwechseln</mat-chip-option>
+            <div class="selectedservice" >
+              <mat-chip-listbox [contentEditable]="false" readonly="true" formControlName="auswahl" (change)="onSelectionChange($event)" required>
+                <mat-chip-option  [value]="option1" color="accent" selected>Räderwechseln</mat-chip-option>
+                <mat-chip-option  [value]="option2" color="accent">Reifenwechseln</mat-chip-option>
               </mat-chip-listbox>
             </div>
           </div>
@@ -182,14 +182,13 @@
 
     <!----------------- stepper 2------------------->
 
-    <mat-step  label="Fahrzeuginformationen">
-      <form [formGroup]="autoinformationen" >
-        <div style="width: 60%" class="container d-flex input flex-wrap justify-content-evenly align-items-md-center align-content-center gap-4">
+    <mat-step [stepControl]="autoinformationen"  label="Fahrzeuginformationen">
+      <form [formGroup]="autoinformationen">
+        <div style="width: 70%" class="container d-flex input flex-wrap justify-content-evenly gap-4">
           <div class="mb-3">
-
             <mat-form-field appearance="outline">
               <mat-label>Fahrzeugart</mat-label>
-              <mat-select >
+              <mat-select type="text" formControlName="fahrzeugtyp" required>
                 <mat-option value="1">SUV</mat-option>
                 <mat-option value="2">VAN / BUS</mat-option>
                 <mat-option value="3">PKW</mat-option>
@@ -200,26 +199,43 @@
           <div class="mb-3">
             <mat-form-field appearance="outline">
               <mat-label>Automarke</mat-label>
-              <input  matInput type="automarke" formControlName="automarke">
+              <input  matInput formControlName="automarke" required>
             </mat-form-field>
           </div>
-          <div class="mb-3">
+
+          <div *ngIf="reifenwechsel" class="mb-3">
             <mat-form-field appearance="outline">
-              <mat-label>Reifengrößen</mat-label>
-              <input  matInput type="reifen" formControlName="reifen">
+              <mat-label>Reifengröße</mat-label>
+              <input matInput formControlName="reifengroesse" required>
             </mat-form-field>
           </div>
-          <div class="mb-3">
+          <div *ngIf="!reifenwechsel" class="mb-3">
+
             <mat-form-field appearance="outline">
-              <mat-label></mat-label>
-              <input  matInput type="rad" formControlName="rad">
+              <mat-label>Radgröße</mat-label>
+              <input matInput formControlName="radgroesse" required>
             </mat-form-field>
+          </div>
+
+          <div *ngIf="radwechsln" class="mb-3">
             <mat-form-field appearance="outline">
               <mat-label>Räderart</mat-label>
-              <mat-select >
+              <mat-select formControlName="raederart" required>
                 <mat-option value="stahl">STAHL</mat-option>
                 <mat-option value="alu">ALU</mat-option>
               </mat-select>
+            </mat-form-field>
+          </div>
+          <div  [style.margin-left.px]="radwechsln ? 60 : 0" class=" align-self-baseline"  style="width: 215px;">
+            <mat-form-field style="width: 150px !important;" class="anzahlreifen align-self-center"  appearance="outline">
+              <mat-label>Anzahl der {{anzahlname}}</mat-label>
+              <input matInput value="1" formControlName="anzahlreifen" class=" text-center bold" readonly>
+              <button mat-icon-button matPrefix (click)="decrease()">
+                <mat-icon style="color: rgb(210,51,51)">do_not_disturb_on</mat-icon>
+              </button>
+              <button mat-icon-button matSuffix (click)="increase()">
+                <mat-icon style="color: rgb(51,210,77)">add_circle</mat-icon>
+              </button>
             </mat-form-field>
           </div>
 
@@ -242,7 +258,7 @@
           <mat-form-field style="width: 20rem"  class="input" appearance="outline">
             <mat-label>Wählen Sie ein Datum aus</mat-label>
             <input disabled matInput [min]="currentTime" [matDatepicker]="picker" (dateChange)="getDate($event)" required>
-            <mat-hint style="color: #DC143C; font-weight: 500; margin-top: 5px">TT.MM.JJJJ</mat-hint>
+            <mat-hint style="color: #ce2a2a; font-weight: 500; margin-top: 5px">TT.MM.JJJJ</mat-hint>
             <mat-datepicker-toggle disabled="false" style="color: #1b3fb6" matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker disabled="false" #picker></mat-datepicker>
           </mat-form-field>
@@ -254,7 +270,7 @@
                 <mat-card-title>Wählen Sie eine Uhrzeit aus</mat-card-title>
               </mat-card-header>
               <mat-card-content style="margin-top: 20px;">
-                <mat-chip-listbox (change)="onSelectionChange($event)">
+                <mat-chip-listbox (change)="gettermin($event)">
                   <mat-chip-option color="accent" >9:30</mat-chip-option>
                   <mat-chip-option color="accent" >10:00</mat-chip-option>
                   <mat-chip-option color="accent" >11:00</mat-chip-option>
@@ -304,10 +320,11 @@
 
         <div>
           <form class="d-flex flex-column gap-4" #form="ngForm" (ngSubmit)="confirmed()">
-            <mat-slide-toggle ngModel name="acceptTerms" required>Accept Terms of Service</mat-slide-toggle>
-            <div class="d-flex justify-content-between " style="margin-top: 20px">
+            <mat-slide-toggle [(ngModel)]="acceptTerms" name="acceptTerms" required><span style="margin-left: 10px">
+              Ich bestätige, dass ich <a href="#">die Nutzungsbedingungen</a> dieser Webseite gelesen habe und diesen zustimme.</span></mat-slide-toggle>
+            <div class="d-flex justify-content-between" style="margin-top: 20px">
               <button mat-stroked-button color="primary" style="height: 50px;width: 200px; margin-right: 100px" class="btn" matStepperPrevious>Zurück</button>
-              <button mat-raised-button color="primary" style="background-color: #00BC4E !important;height: 50px;width: 200px" class="btn" matStepperNext>Auftrag absenden</button>
+              <button [disabled]="!acceptTerms" mat-raised-button color="primary" style="background-color: #00BC4E !important;height: 50px;width: 200px" class="btn" matStepperNext>Auftrag absenden</button>
             </div>
           </form>
         </div>

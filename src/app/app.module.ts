@@ -3,7 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormularComponent } from './formular/formular.component';
+import { FormularComponent } from './component/formular/formular.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
@@ -27,8 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import { StepperComponent } from './stepper/stepper.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { StepperComponent } from './component/stepper/stepper.component';
+import { AdminPageComponent } from './component/admin-page/admin-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import {MatTabLabel} from "@angular/material/tabs";
 import {MatChipListbox, MatChipOption, MatChipRemove} from "@angular/material/chips";
