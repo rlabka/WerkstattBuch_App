@@ -1,26 +1,26 @@
 export interface Auftrag {
   kundeinformationen: {
-  firstName: string;
-  lastName: string;
-  tel: string;
-  email: string;
-  adresse: string;
-  hausnummer: string;
-  plz: string;
-  stadt: string;
-  auswahl: string;
-};
+    firstName: string;
+    lastName: string;
+    tel: number;
+    email: string;
+    adresse: string;
+    hausnummer: number;
+    plz: number;
+    stadt: string;
+    auswahl: string;
+  };
   autoinformationen: {
     automarke: string;
     fahrzeugtyp: string;
-    reifengroesse: string;
+    reifengroesse: number;
     radgroesse: string;
     raederart: string;
     anzahlreifen: number;
   };
   timestamp: Date;
   termin: {
-    termindatum: Date;
+    termindatum: string;
     terminuhrzeit: string;
   };
 }

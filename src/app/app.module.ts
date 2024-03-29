@@ -23,7 +23,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule, provideHttpClient} from "@angular/common/http";
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
@@ -49,6 +49,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     MatIcon,

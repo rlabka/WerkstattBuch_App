@@ -6,7 +6,7 @@
 }
 
 <div class="stepper">
-  <mat-stepper [disableRipple]="false" [linear]="isLinear" labelPosition="bottom" [orientation]="(stepperOrientation | async)!">
+  <mat-stepper #stepper [disableRipple]="false" [linear]="isLinear" labelPosition="bottom" [orientation]="(stepperOrientation | async)!">
     <mat-step [stepControl]="kundeinformationen">
       <form [formGroup]="kundeinformationen" #myForm="ngForm">
         <ng-template matStepLabel>Persönliche Daten</ng-template>
@@ -54,7 +54,7 @@
                       <div  class="input inputmaill" >
                         <mat-form-field  class="mailinput" appearance="outline">
                           <mat-label>Email</mat-label>
-                          <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" type="email"
+                          <input matInput formControlName="email"
                                  placeholder="z.B. pat@example.com" required>
                           @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
                             <mat-error>Bitte geben Sie eine gültige E-Mail-Adresse ein</mat-error>
@@ -251,13 +251,14 @@
 
     <!----------------- stepper 3------------------->
 
-    <mat-step>
+    <mat-step [stepControl]="termin">
+      <form [formGroup]="termin">
       <ng-template matStepLabel>Terminauswahl</ng-template>
       <div class="container d-flex flex-column align-items-center">
         <div style="padding-top: 13px; padding-bottom: 15px" class="d-flex justify-content-center">
           <mat-form-field style="width: 20rem"  class="input" appearance="outline">
             <mat-label>Wählen Sie ein Datum aus</mat-label>
-            <input disabled matInput [min]="currentTime" [matDatepicker]="picker" (dateChange)="getDate($event)" required>
+            <input  matInput [min]="currentTime" formControlName="termindatum" [matDatepicker]="picker" (dateChange)="getDate($event)" required>
             <mat-hint style="color: #ce2a2a; font-weight: 500; margin-top: 5px">TT.MM.JJJJ</mat-hint>
             <mat-datepicker-toggle disabled="false" style="color: #1b3fb6" matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker disabled="false" #picker></mat-datepicker>
@@ -270,7 +271,7 @@
                 <mat-card-title>Wählen Sie eine Uhrzeit aus</mat-card-title>
               </mat-card-header>
               <mat-card-content style="margin-top: 20px;">
-                <mat-chip-listbox (change)="gettermin($event)">
+                <mat-chip-listbox formControlName="terminuhrzeit" required>
                   <mat-chip-option color="accent" >9:30</mat-chip-option>
                   <mat-chip-option color="accent" >10:00</mat-chip-option>
                   <mat-chip-option color="accent" >11:00</mat-chip-option>
@@ -288,6 +289,7 @@
           <button mat-raised-button color="primary" style="height: 50px;width: 200px" class="btn" matStepperNext>Nächste Schritt</button>
         </div>
       </div>
+      </form>
     </mat-step>
 
     <!----------------- stepper 4------------------->
