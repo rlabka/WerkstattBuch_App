@@ -41,11 +41,12 @@ import {
 } from "@angular/material/datepicker";
 import {MatDivider} from "@angular/material/divider";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import { AuftreageComponent } from './component/auftreage/auftreage.component';
 
 @NgModule({
 
   declarations: [
-    AppComponent,FormularComponent, StepperComponent, AdminPageComponent
+    AppComponent,FormularComponent, StepperComponent, AdminPageComponent, AuftreageComponent
   ],
   imports: [
     BrowserModule,

@@ -264,24 +264,19 @@
             <mat-datepicker disabled="false" #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        @if (aktiveTermin){
-          <div class="termincontainer" style="content: initial; min-height: 15rem; max-width: 30rem; margin-top: 15px;">
-            <mat-card class="shadow-sm p-3 mb-5 bg-light rounded" style="height: 100%">
-              <mat-card-header>
-                <mat-card-title>Wählen Sie eine Uhrzeit aus</mat-card-title>
-              </mat-card-header>
-              <mat-card-content style="margin-top: 20px;">
-                <mat-chip-listbox formControlName="terminuhrzeit" required>
-                  <mat-chip-option color="accent" >9:30</mat-chip-option>
-                  <mat-chip-option color="accent" >10:00</mat-chip-option>
-                  <mat-chip-option color="accent" >11:00</mat-chip-option>
-                  <mat-chip-option color="accent" >12:00</mat-chip-option>
-                </mat-chip-listbox>
-              </mat-card-content>
-            </mat-card>
+        <div class="termincontainer" style="content: initial; min-height: 15rem; max-width: 30rem; margin-top: 15px;">
+          <mat-card class="shadow-sm p-3 mb-5 bg-light rounded" style="height: 100%" *ngIf="aktiveTermin">
+            <mat-card-header>
+              <mat-card-title>Wählen Sie eine Uhrzeit aus</mat-card-title>
+            </mat-card-header>
+            <mat-card-content style="margin-top: 20px;">
+              <mat-chip-listbox formControlName="terminuhrzeit" required>
+                <mat-chip-option color="accent" *ngFor="let termin of termine">{{ termin.uhrzeit }}</mat-chip-option>
+              </mat-chip-listbox>
+            </mat-card-content>
+          </mat-card>
+        </div>
 
-          </div>
-        }
       </div>
       <div>
         <div class="d-flex justify-content-between " style="margin-top: 20px">

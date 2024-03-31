@@ -109,6 +109,7 @@ export class StepperComponent {
 
   getDate(event: MatDatepickerInputEvent<Date>) {
     this.aktiveTermin = true;
+    this.getTermine(this.termin.get('termindatum')?.value);
     console.log('Ausgewähltes Datum:', event.value?.getFullYear());
   }
 
@@ -171,7 +172,22 @@ export class StepperComponent {
     });
   }
 
+  // @ts-ignore
+  termine:any[];
 
+  getTermine(date: string) {
+    this.auftragservice.getTermin(date)
+      .subscribe(
+        data => {
+          this.termine = data;
+          console.log('data: '+this.termine);
+        },
+        error => {
+          console.error('Error fetching termine:', error);
+          // Handle error here
+        }
+      );
+  }
 
 
   increase() {

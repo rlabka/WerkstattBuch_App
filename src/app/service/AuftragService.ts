@@ -16,8 +16,21 @@ export class AuftragService {
 
 
   saveAuftrag(auftrag: any): Observable<any> {
+    return this.http.post<Auftrag>(this.apiUrl+'/auftrag/neu', auftrag);
+  }
 
-    return this.http.post<Auftrag>('http://localhost:8080/auftrag/neu', auftrag);
+  getTermin(date: any): Observable<any[]> {
+    let x= this.formatDate(date)
+    console.log('x',x);
+    return this.http.get<any[]>(`${this.apiUrl}/terminverwaltung/get?date=${x}`);
+
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
   }
 
 }

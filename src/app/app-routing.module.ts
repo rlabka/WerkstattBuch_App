@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AdminPageComponent} from "./component/admin-page/admin-page.component";
 import {FormularComponent} from "./component/formular/formular.component";
+import {AuftreageComponent} from "./component/auftreage/auftreage.component";
 
 
 const routes: Routes = [
   {
     path: 'admin', component: AdminPageComponent,
     children: [
-      { path: 'auftrag', component: FormularComponent }
+      { path: 'auftrag', component: AuftreageComponent }
     ]
   },
   { path: '**', component: FormularComponent},
