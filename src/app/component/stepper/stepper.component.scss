@@ -49,7 +49,7 @@
 }
 
 .img{
-  transform: scale(3);
+  transform: scale(1.7);
   font-weight: bold;
   color: rgba(5, 5, 5, 0.55);
 
@@ -125,6 +125,15 @@
   margin-top: 15px;
   .mat-mdc-chip-option{
     height: 50px !important;
+  }
+}
+.termincontainer{
+
+  .mdc-evolution-chip-set__chips{
+    padding-left: 11px !important;
+  }
+  .mdc-evolution-chip-set{
+    padding-left: 11px !important;
   }
 }
 
@@ -241,7 +250,7 @@
     margin-left: 0.9rem;
   }
   .img{
-    transform: scale(1.8);
+    transform: scale(1.4);
   }
 
 }

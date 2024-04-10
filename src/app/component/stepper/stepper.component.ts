@@ -2,7 +2,7 @@ import {Component, input, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {MyErrorStateMatcher} from "../formular/formular.component";
 import {StepperOrientation} from "@angular/cdk/stepper";
-import {map, Observable, Subscription, timestamp} from "rxjs";
+import {interval, map, Observable, Subscription, timestamp} from "rxjs";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {MatChipListboxChange, MatChipSelectionChange} from "@angular/material/chips";
@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import {AuftragService} from "../../service/AuftragService";
 import {Auftrag} from "../../interface/Auftrag";
 import {MatStepper} from "@angular/material/stepper";
+import { WebSocketService } from '../../service/WebSocketService';
 
 
 
@@ -57,8 +58,9 @@ export class StepperComponent {
   });
   selected: any;
   @ViewChild(MatStepper) stepper!: MatStepper;
+  private subscription: Subscription | undefined;
 
-  constructor(private formBuilder: FormBuilder,  breakpointObserver: BreakpointObserver, private auftragservice:AuftragService ,private _formBuilder: FormBuilder
+  constructor(private formBuilder: FormBuilder,  breakpointObserver: BreakpointObserver, private auftragservice: AuftragService ,private _formBuilder: FormBuilder
   ) {
     this.currentTime = new Date();
     this.anzahlname='Rädern';
@@ -109,7 +111,7 @@ export class StepperComponent {
 
   getDate(event: MatDatepickerInputEvent<Date>) {
     this.aktiveTermin = true;
-    this.getTermine(this.termin.get('termindatum')?.value);
+    this.fetchTermine(this.termin.get('termindatum')?.value);
     console.log('Ausgewähltes Datum:', event.value?.getFullYear());
   }
 
@@ -171,24 +173,42 @@ export class StepperComponent {
       });
     });
   }
+  ngOnDestroy(): void {
+    // Aufräumen und Beenden des periodischen Abonnements beim Verlassen des Components
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   // @ts-ignore
   termine:any[];
-
-  getTermine(date: string) {
-    this.auftragservice.getTermin(date)
-      .subscribe(
-        data => {
-          this.termine = data;
-          console.log('data: '+this.termine);
-        },
-        error => {
-          console.error('Error fetching termine:', error);
-          // Handle error here
-        }
-      );
+  startFetchingDataPeriodically(date: string): void {
+    // Periodisches Aufrufen der Methode alle 5 Sekunden
+    this.subscription = interval(5000).subscribe(() => {
+      this.fetchTermine(date);
+    });
   }
 
+  fetchTermine(date: string): void {
+    this.auftragservice.getTermin(date).subscribe(
+      newData => {
+        // Tiefes Vergleichen der Daten
+        if (!this.areEqual(newData, this.termine)) {
+          this.termine = newData;
+          console.log('Updated data: ', this.termine);
+        }
+      },
+      error => {
+        console.error('Error fetching termine:', error);
+        // Handle error here
+      }
+    );
+  }
+
+  areEqual(newData: any, oldData: any): boolean {
+    // Tiefes Vergleichen der Daten
+    return JSON.stringify(newData) === JSON.stringify(oldData);
+  }
 
   increase() {
     const currentValue = this.autoinformationen.get('anzahlreifen')?.value;
