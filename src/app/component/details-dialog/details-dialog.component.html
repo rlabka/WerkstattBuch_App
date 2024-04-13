@@ -1,0 +1,117 @@
+<!-- Auftraginformationen -->
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Auftraginformationen</h2>
+  </div>
+  <div style="margin-top: 0 !important; padding-top: 0!important;" class="d-flex gap-5">
+    <div style="margin-left: 70px" class="">
+      <ul class="list-group list-group-light list-group-big ">
+        <li class="list-group-item px-3">Auftragsnummer</li>
+        <li class="list-group-item px-3">Timestamp</li>
+        <li class="list-group-item px-3">Serviceoption</li>
+      </ul>
+    </div>
+    <div class="">
+      <ul class="list-group list-group-light list-group-big">
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftragsnummer }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ formatTimestamp(data.timestamp)}}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.auswahl }}</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Fahrzeuginformationen</h2>
+  </div>
+  <div style="margin-top: 0 !important; padding-top: 0!important;" class="d-flex gap-5">
+    <div style="margin-left: 70px" class="">
+      <ul class="list-group list-group-light list-group-big ">
+        <li class="list-group-item px-3">Automarke</li>
+        <li class="list-group-item px-3">Fahrzeugtyp</li>
+        <li *ngIf="data.autoinformationen.reifengroesse" class="list-group-item px-3">Reifengröße</li>
+        <li *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Radgröße</li>
+        <li *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Räderart</li>
+        <li *ngIf="!data.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Reifen</li>
+        <li *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Rädern</li>
+      </ul>
+    </div>
+    <div class="">
+      <ul class="list-group list-group-light list-group-big">
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.automarke }}</span></li>
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.fahrzeugtyp }}</span></li>
+        @if (data.autoinformationen.radgroesse){
+          <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.radgroesse }}</span></li>
+          <li class="list-group-item px-3"><span>{{ data.autoinformationen.raederart }}</span></li>
+        }
+        @if (data.autoinformationen.reifengroesse){
+          <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.reifengroesse }}</span></li>
+        }
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.anzahlreifen }}</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Kundeinformationen</h2>
+    </div>
+    <div style="margin-top: 0 !important; padding-top: 0!important;" class="d-flex gap-5">
+      <div style="margin-left: 70px" class="">
+        <ul class="list-group list-group-light list-group-big ">
+          <li class="list-group-item px-3">Vorname</li>
+          <li class="list-group-item px-3">Nachname</li>
+          <li class="list-group-item px-3">Telefon</li>
+          <li class="list-group-item px-3">E-Mail</li>
+          <li class="list-group-item px-3">Adresse</li>
+          <li *ngIf="data.kundeinformationen.hausnummer" class="list-group-item px-3">Hausnummer</li>
+          <li  *ngIf="data.kundeinformationen.plz" class="list-group-item px-3">PLZ</li>
+          <li  *ngIf="data.kundeinformationen.stadt" class="list-group-item px-3">Stadt</li>
+        </ul>
+      </div>
+      <div class="">
+        <ul class="list-group list-group-light list-group-big">
+          <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.firstName }}</span></li>
+          <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.lastName }}</span></li>
+          <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.tel }}</span></li>
+          <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.email }}</span></li>
+          @if (data.kundeinformationen.stadt){
+            <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.adresse }}</span></li>
+          } @else {
+            <li style="color: black" class="list-group-item px-3">
+              <button mat-icon-button (click)="openLinkInNewTab()">
+              <mat-icon style="color: #0b2e9f;">my_location</mat-icon>
+            </button>
+            </li>
+          }
+
+          <li *ngIf="data.kundeinformationen.hausnummer" style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.hausnummer }}</span></li>
+          <li *ngIf="data.kundeinformationen.plz " style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.plz }}</span></li>
+          <li *ngIf="data.kundeinformationen.stadt" style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.stadt }}</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Termininformationen</h2>
+      </div>
+      <div style="margin-top: 0 !important; padding-top: 0!important;" class="d-flex gap-5">
+        <div style="margin-left: 70px" class="">
+          <ul class="list-group list-group-light list-group-big ">
+            <li class="list-group-item px-3">Termin Datum</li>
+            <li class="list-group-item px-3">Termin Uhrzeit</li>
+          </ul>
+        </div>
+        <div class="">
+          <ul class="list-group list-group-light list-group-big">
+            <li style="color: black" class="list-group-item px-3"><span>{{ formatDate(data.termin.termindatum) }}</span></li>
+            <li style="color: black" class="list-group-item px-3"><span>{{ data.termin.terminuhrzeit }}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <div class="card-body">
+    <button mat-raised-button color="primary" style="background-color: #0aa348 !important;" class="card-link">Bestätigen</button>
+    <button mat-raised-button color="primary" style="background-color: #da1313 !important;" class="card-link">Ablehnen</button>
+  </div>
+</div>
+</div>

@@ -19,6 +19,10 @@ export class AuftragService {
     return this.http.post<Auftrag>(this.apiUrl+'/auftrag/neu', auftrag);
   }
 
+  getAll(): Observable<any> {
+    return this.http.get<Auftrag>(this.apiUrl+'/auftrag/all');
+  }
+
   getTermin(date: any): Observable<any[]> {
     let x= this.formatDate(date)
     console.log('x',x);
