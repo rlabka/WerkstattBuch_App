@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {AuftragService} from "../../service/AuftragService";
 
 @Component({
   selector: 'app-details-dialog',
@@ -7,7 +8,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
   styleUrl: './details-dialog.component.scss'
 })
 export class DetailsDialogComponent {
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, private auftragService: AuftragService) {
   }
 
   formatDate(date: string): string {
@@ -34,5 +35,13 @@ export class DetailsDialogComponent {
     const seconds = String(date.getSeconds()).padStart(2, '0');
 
     return `${formattedDate}, ${hours}:${minutes}:${seconds}`;
+  }
+
+  confirmOrder() {
+    this.auftragService.Updatestatus('bestätigt', this.data.auftragsnummer);
+  }
+
+  declineOrder() {
+    this.auftragService.Updatestatus('abgelehnt',this.data.auftragsnummer);
   }
 }

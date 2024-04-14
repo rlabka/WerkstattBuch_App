@@ -60,11 +60,14 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { DetailsDialogComponent } from './component/details-dialog/details-dialog.component';
 import {MatPaginator} from "@angular/material/paginator";
+import {MatBadge} from "@angular/material/badge";
+import { HistoryComponent } from './component/history/history.component';
+import { RechnungComponent } from './component/rechnung/rechnung.component';
 
 @NgModule({
 
   declarations: [
-    AppComponent,FormularComponent, StepperComponent, AdminPageComponent, AuftreageComponent, DetailsDialogComponent
+    AppComponent,FormularComponent, StepperComponent, AdminPageComponent, AuftreageComponent, DetailsDialogComponent, HistoryComponent, RechnungComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,8 @@ import {MatPaginator} from "@angular/material/paginator";
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    MatPaginator
+    MatPaginator,
+    MatBadge
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

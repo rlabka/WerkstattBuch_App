@@ -2,14 +2,18 @@
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
     <a href="javascript:void(0)" (click)="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-    <div class="w3-container">
-      <h3 class="w3-padding-64"><b>Mobile Majouno<br>Service</b></h3>
+    <div style="padding-bottom: 100px; " class="w3-container">
+      <img src="/assets/homelogo.jpg" alt="Mobile Majouno Service Logo" style="width: 100%; max-width: 100%;">
     </div>
     <div class="w3-bar-block">
-      <a routerLink="auftrag" class="w3-bar-item w3-button w3-hover-white">Aufträge</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-white">Aufträge History</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-white">Einstellungen</a>
+      <a routerLink="auftrag" class="w3-bar-item w3-button demo-section w3-hover-white" >
+        <span>Neue Aufträge</span>
+        <span style="position: absolute; margin-left: 10px" matBadge="4" matBadgePosition="above after" matBadgeOverlap="false" ></span>
+      </a>
+      <a routerLink="history"  class="w3-bar-item w3-button w3-hover-white">Fertiggestellte Aufträge</a>
+      <a class="w3-bar-item w3-button w3-hover-white">Einstellungen</a>
     </div>
+    <a style="margin-top: 300px" class="w3-bar-item w3-button w3-hover-white">Abmelden</a>
   </nav>
 
   <!-- Top menu on small screens -->

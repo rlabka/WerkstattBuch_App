@@ -60,10 +60,13 @@ export class AuftreageComponent {
   }
 
   openDetailsDialog(auftrag:any): void {
+
     const dialogRef = this.dialog.open(DetailsDialogComponent, {
+
       width: '550px',
       maxHeight: '700px',
-      data: auftrag
+      data: auftrag,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -109,9 +109,9 @@
         </div>
       </div>
     </div>
-  <div class="card-body">
-    <button mat-raised-button color="primary" style="background-color: #0aa348 !important;" class="card-link">Bestätigen</button>
-    <button mat-raised-button color="primary" style="background-color: #da1313 !important;" class="card-link">Ablehnen</button>
+    <div class="card-body">
+      <button mat-raised-button color="primary" style="background-color: #0aa348 !important;" class="card-link" (click)="confirmOrder()">Bestätigen</button>
+      <button mat-raised-button color="primary" style="background-color: #da1313 !important;" class="card-link" (click)="declineOrder()">Ablehnen</button>
+    </div>
   </div>
-</div>
 </div>
