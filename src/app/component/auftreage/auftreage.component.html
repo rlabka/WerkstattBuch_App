@@ -7,7 +7,7 @@
   </div>
   <div style="margin-top: 30px">
 
-    <mat-card>
+    <mat-card class="shadow p-3 mb-5 bg-body rounded">
       <mat-card-header>
         <div>
           <mat-card-title>
@@ -36,12 +36,12 @@
           <!-- Schleife durch die auftragsListe und Anzeige der Daten -->
           <tr *ngFor="let auftrag of (filteredAuftragsListe.length > 0 ? filteredAuftragsListe : auftragsListe)">
 
-          <td class="text-center align-content-center">{{ auftrag.auftragsnummer }}</td>
+            <td class="text-center align-content-center">{{ auftrag.auftragsnummer }}</td>
             <td class="text-center">
               <!-- Hier kann das Name- und E-Mail-Format je nach Datenstruktur angepasst werden -->
               <div class="d-flex align-items-center">
                 <div class="rounded-circle align-content-center" style="width: 45px; height: 45px; align-content: center; align-items: center">
-                  <mat-icon style="scale: 1.9; margin-left: 10px; margin-top: 5px; color: #736f6f"> account_circle</mat-icon>
+                  <mat-icon class="fa-regular fa-circle-user" style="scale: 1.9; margin-left: 10px; margin-top: 5px;" color="primary"></mat-icon>
                 </div>
                 <div class="ms-3 text-start">
                   <p class="fw-bold mb-1">{{ auftrag.kundeinformationen.firstName }} {{ auftrag.kundeinformationen.lastName }}</p>
@@ -56,7 +56,7 @@
               </ng-container>
               <ng-container *ngIf="!auftrag.kundeinformationen.plz && !auftrag.kundeinformationen.stadt">
                 <button mat-icon-button (click)="openLinkInNewTab(auftrag.kundeinformationen.adresse)">
-                  <mat-icon style="color: #0b2e9f;">my_location</mat-icon>
+                  <mat-icon class="fa-solid fa-location-arrow" style="color: #275af8;"></mat-icon>
                 </button>
               </ng-container>
             </td>

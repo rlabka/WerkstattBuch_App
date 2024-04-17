@@ -37,7 +37,7 @@ export class AuftragService {
     return `${day}.${month}.${year}`;
   }
 
-  Updatestatus(status: string, auftragsnummer: string): Observable<any> {
+  Updatestatus(status: string, auftragsnummer: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { status: status };
 

@@ -1,70 +1,27 @@
-import {Component, Inject, Output, ViewChild} from '@angular/core';
+import { Component } from '@angular/core';
 import {AuftragService} from "../../service/AuftragService";
-import {Auftrag} from "../../interface/Auftrag";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {DetailsDialogComponent} from "../details-dialog/details-dialog.component";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {interval, Subscription, switchMap} from "rxjs";
-import EventEmitter from "node:events";
-
+import {PageEvent} from "@angular/material/paginator";
+import {RechnungComponent} from "../rechnung/rechnung.component";
 
 @Component({
-  selector: 'app-auftreage',
-  templateUrl: './auftreage.component.html',
-  styleUrl: './auftreage.component.scss'
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrl: './history.component.scss'
 })
-
-export class AuftreageComponent {
+export class HistoryComponent {
 
   auftragsListe: any[] = [];
   filteredAuftragsListe: any[] = [];
   searchTerm: string = '';
-  private updateSubscription: Subscription;
-
   //@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   constructor(private auftragService: AuftragService, public dialog: MatDialog) {
     this.getAllAusstehendeAuftrags();
 
-    let previousAuftragsListe: any[] = [];
 
-    this.updateSubscription = interval(5000)
-      .pipe(
-        switchMap(() => this.auftragService.getAll())
-      )
-      .subscribe(
-        (data: any[]) => {
-          const newAuftragsListe = data.filter(auftrag => auftrag.status === 'Ausstehend');
-
-          // Überprüfe, ob sich die Daten geändert haben
-          if (this.hasChanges(previousAuftragsListe, newAuftragsListe)) {
-            this.auftragsListe = newAuftragsListe;
-            this.filteredAuftragsListe = [...this.auftragsListe];
-          }
-
-          // Aktualisiere die vorherige Liste
-          previousAuftragsListe = newAuftragsListe;
-        },
-        error => {
-          console.log('Fehler beim Abrufen der ausstehenden Aufträge:', error);
-        }
-      );
-  }
-
-// Überprüfe, ob sich die Listen geändert haben
-  private hasChanges(previousList: any[], newList: any[]): boolean {
-    if (previousList.length !== newList.length) {
-      return true;
-    }
-
-    for (let i = 0; i < previousList.length; i++) {
-      if (JSON.stringify(previousList[i]) !== JSON.stringify(newList[i])) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   ngOnInit(): void {
@@ -75,7 +32,7 @@ export class AuftreageComponent {
   getAllAusstehendeAuftrags() {
     this.auftragService.getAll().subscribe(
       (data: any[]) => {
-        this.auftragsListe = data.filter(auftrag => auftrag.status === 'Ausstehend');
+        this.auftragsListe = data.filter(auftrag => auftrag.status != 'Ausstehend');
       },
       error => {
         console.log('Fehler beim Abrufen der ausstehenden Aufträge:', error);
@@ -111,8 +68,8 @@ export class AuftreageComponent {
       autoFocus: false
     });
 
-    dialogRef.componentInstance.dialogClosed.subscribe(() => {
-      this.getAllAusstehendeAuftrags();
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog wurde geschlossen', result);
     });
   }
 
@@ -131,4 +88,16 @@ export class AuftreageComponent {
     this.pageSize = $event.pageSize;
   }
 
+  OpenRechnung(auftrag: any) {
+    const dialogRef = this.dialog.open(RechnungComponent, {
+      width: '1000px',
+      maxHeight: '700px',
+      data: auftrag,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog wurde geschlossen', result);
+    });
+  }
 }

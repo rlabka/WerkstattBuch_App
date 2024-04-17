@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-page.component.scss'] // Beachte den Plural 'styleUrls' anstelle von 'styleUrl'
 })
 export class AdminPageComponent {
+  totalanzahl: number=3;
 
   w3_close() {
     // @ts-ignore
