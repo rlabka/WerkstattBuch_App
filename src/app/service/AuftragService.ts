@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, interval, map, observable, Observable, Subject, switchMap, tap} from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Auftrag } from '../interface/Auftrag';
 import {FormGroup} from "@angular/forms";
@@ -9,11 +9,16 @@ import {FormGroup} from "@angular/forms";
   providedIn: 'root'
 })
 export class AuftragService {
+  private _refresh$ = new Subject<void>();
 
   private apiUrl = environment.apiEndpoint;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
+  get refresh$(){
+    return this._refresh$;
+  }
 
   saveAuftrag(auftrag: any): Observable<any> {
     return this.http.post<Auftrag>(this.apiUrl+'/auftrag/neu', auftrag);
@@ -27,7 +32,6 @@ export class AuftragService {
     let x= this.formatDate(date)
     console.log('x',x);
     return this.http.get<any[]>(`${this.apiUrl}/terminverwaltung/get?date=${x}`);
-
   }
 
   private formatDate(date: Date): string {
@@ -35,6 +39,23 @@ export class AuftragService {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
+  }
+  getOutstandingAuftrags(): Observable<any[]> {
+    this.changeNumberEmitter();
+    return this.getAll().pipe(
+      map(auftrags => auftrags.filter((auftrag: { status: string; }) => auftrag.status === 'Ausstehend'))
+    );
+  }
+  changeNumberEmitter(): Observable<number> {
+    return interval(1000).pipe(
+      switchMap(() => this.getOutstandingAuftrags()),
+      map(auftrags => {
+        return auftrags.length;
+      }),
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   Updatestatus(status: string, auftragsnummer: number): Observable<any> {

@@ -47,7 +47,7 @@ export class DetailsDialogComponent {
     // Dialog schließen
     this.dialogRef.close();
 
-    const auftragsnummer = this.data.auftragsnummer;
+    const auftragsnummer = this.data.auftrag.auftragsnummer;
 
     this.auftragService.Updatestatus('bestätigt', auftragsnummer).subscribe(
       response => {
@@ -86,7 +86,7 @@ export class DetailsDialogComponent {
     });
 
     if (isConfirmed) {
-      const auftragsnummer = this.data.auftragsnummer;
+      const auftragsnummer = this.data.auftrag.auftragsnummer;
 
       this.auftragService.Updatestatus('abgelehnt', auftragsnummer).subscribe(
         response => {
@@ -110,5 +110,9 @@ export class DetailsDialogComponent {
       console.log('Auftrag wurde nicht abgelehnt.');
     }
     this.dialogClosed.next();
+  }
+
+  close(){
+    this.dialogRef.close();
   }
 }

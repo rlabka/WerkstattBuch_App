@@ -14,7 +14,7 @@ export class HistoryComponent {
 
   auftragsListe: any[] = [];
   filteredAuftragsListe: any[] = [];
-  searchTerm: string = '';
+  search: string = '';
   //@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -25,14 +25,14 @@ export class HistoryComponent {
   }
 
   ngOnInit(): void {
-
-
+    this.filterAuftragsListe()
   }
 
   getAllAusstehendeAuftrags() {
     this.auftragService.getAll().subscribe(
       (data: any[]) => {
         this.auftragsListe = data.filter(auftrag => auftrag.status != 'Ausstehend');
+        this.filterAuftragsListe(); // Filtern Sie die Liste nach dem Abrufen der Daten
       },
       error => {
         console.log('Fehler beim Abrufen der ausstehenden Aufträge:', error);
@@ -40,17 +40,18 @@ export class HistoryComponent {
     );
   }
 
+
   openLinkInNewTab(link: string) {
     const url = `https://www.google.com/maps/search/?api=1&query=${(link)}`;
     window.open(url, '_blank');
   }
 
   filterAuftragsListe() {
-    if (!this.searchTerm) {
-      this.filteredAuftragsListe = [...this.auftragsListe];  // Setze filteredAuftragsListe auf alle Aufträge zurück
+    if (!this.search) {
+      this.filteredAuftragsListe = [...this.auftragsListe];
       return;
     }
-    const searchTermLower = this.searchTerm.toLowerCase();
+    const searchTermLower = this.search.toLowerCase();
     this.filteredAuftragsListe = this.auftragsListe.filter(auftrag =>
       auftrag.auftragsnummer.toString().toLowerCase().includes(searchTermLower) ||
       auftrag.kundeinformationen.firstName.toLowerCase().includes(searchTermLower) ||
@@ -58,24 +59,9 @@ export class HistoryComponent {
     );
   }
 
-  openDetailsDialog(auftrag:any): void {
-
-    const dialogRef = this.dialog.open(DetailsDialogComponent, {
-
-      width: '550px',
-      maxHeight: '700px',
-      data: auftrag,
-      autoFocus: false
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog wurde geschlossen', result);
-    });
-  }
-
 
   currentPage = 0;
-  pageSize = 1;
+  pageSize = 5;
 
   get paginatedAuftragsListe() {
     const start = this.currentPage * this.pageSize;
@@ -99,5 +85,40 @@ export class HistoryComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog wurde geschlossen', result);
     });
+  }
+
+  searchAuftragsListe() {
+    if (!this.search) {
+      this.filteredAuftragsListe = [...this.auftragsListe];
+      return;
+    }
+
+    const searchTermLower = this.search.toLowerCase();
+
+    this.filteredAuftragsListe = this.auftragsListe.filter(auftrag => {
+      // Überprüfe, ob auftragsnummer vorhanden und nicht null/undefined ist
+      // const auftragsnummer = auftrag.auftragsnummer ? auftrag.auftragsnummer.toString().toLowerCase() : '';
+
+      const auftragsnummer = auftrag.auftragsnummer ? auftrag.auftragsnummer.toString().toLowerCase() : '';
+      console.log('Aktuelle Auftragsnummer:', auftragsnummer);
+      if (!auftragsnummer)
+        return
+      return  auftrag.auftragsnummer.toString().toLowerCase().includes(searchTermLower) ||
+        auftrag.kundeinformationen.firstName.toLowerCase().includes(searchTermLower) ||
+        auftrag.kundeinformationen.lastName.toLowerCase().includes(searchTermLower) ||
+        (auftrag.kundeinformationen.email && auftrag.kundeinformationen.email.toLowerCase().includes(searchTermLower));
+    });
+  }
+
+  openDetailsDialog(auftrag:any): void {
+
+    const dialogRef = this.dialog.open(DetailsDialogComponent, {
+
+      width: '550px',
+      maxHeight: '700px',
+      data: {auftrag: auftrag, button1Enabled: false},
+      autoFocus: false
+    });
+
   }
 }

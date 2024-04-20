@@ -20,5 +20,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 export class FormularComponent {
 
+  NgOnInit(){
+
+  }
+
+  private loadInitialData() {
+  }
 }
 

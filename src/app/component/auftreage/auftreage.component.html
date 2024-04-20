@@ -12,7 +12,7 @@
         <div>
           <mat-card-title>
             <div class="input-group">
-              <input type="search" style="height: 37px;margin-right: 2px" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm" />
+              <input type="search" style="height: 37px;margin-right: 2px" class="form-control rounded" placeholder="Search" (input)="filterAuftragsListe()" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm" />
               <button mat-raised-button color="primary" (click)="filterAuftragsListe()">Search</button>
             </div>
           </mat-card-title>
@@ -34,8 +34,8 @@
           </thead>
           <tbody>
           <!-- Schleife durch die auftragsListe und Anzeige der Daten -->
-          <tr *ngFor="let auftrag of (filteredAuftragsListe.length > 0 ? filteredAuftragsListe : auftragsListe)">
 
+          <tr *ngFor="let auftrag of (filteredAuftragsListe.length > 0 ? filteredAuftragsListe : auftragsListe)">
             <td class="text-center align-content-center">{{ auftrag.auftragsnummer }}</td>
             <td class="text-center">
               <!-- Hier kann das Name- und E-Mail-Format je nach Datenstruktur angepasst werden -->
@@ -68,10 +68,7 @@
           </tr>
           </tbody>
         </table>
-
       </mat-card-actions>
-      <mat-paginator showFirstLastButtons  [pageSizeOptions]="[5, 10, 20]" aria-label="Select page" (page)="changePage($event)">
-      </mat-paginator>
     </mat-card>
 
   </div>

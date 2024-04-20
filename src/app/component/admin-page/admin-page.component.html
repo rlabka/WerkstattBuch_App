@@ -1,15 +1,15 @@
 
   <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <nav (window:load)="startPolling()" class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
     <a href="javascript:void(0)" (click)="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-    <div style="padding-bottom: 100px; " class="w3-container">
+    <div style="padding: 15px; background: white" class="w3-container">
       <img src="/assets/homelogo.jpg" alt="Mobile Majouno Service Logo" style="width: 100%; max-width: 100%; height: 80px">
     </div>
-    <div class="w3-bar-block">
-      <a  routerLink="auftrag" routerLinkActive="w3-white" style="overflow: visible; padding-bottom: 20px; padding-top: 20px; margin-bottom: 5px" class="w3-bar-item w3-button demo-section w3-hover-white" >
+    <div style="margin-top: 80px" class="w3-bar-block">
+      <a  routerLink="auftrag" [state]="{ parentData: parentData }" routerLinkActive="w3-white" style="overflow: visible; padding-bottom: 20px; padding-top: 20px; margin-bottom: 5px" class="w3-bar-item position-relative w3-button demo-section w3-hover-white" >
         <i style="margin-right: 10px;" class="fa-solid fa-table"></i>
         <span>Neue Aufträge</span>
-        <span style=" margin-left: 10px" matBadge="{{totalanzahl}}" matBadgeColor="warn" matBadgePosition="above after" matBadgeOverlap="false" ></span>
+        <span style=" margin-left: 10px; margin-top: 10px; color: #3b2366" class="badge position-absolute top-0 rounded-pill badge-primary">{{totalanzahl}}</span>
       </a>
       <a routerLinkActive="w3-white" routerLink="history" style="padding-bottom: 20px; padding-top: 20px;  margin-bottom: 5px"  class=" w3-bar-item w3-button w3-hover-white">
         <i style="margin-right: 10px;" class="fa-solid fa-clock-rotate-left"></i>

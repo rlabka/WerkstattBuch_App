@@ -10,8 +10,8 @@
           <div>
             <mat-card-title>
               <div class="input-group">
-                <input type="search" style="height: 37px;margin-right: 2px" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchTerm" />
-                <button mat-raised-button style="background: #50208d; color: white" (click)="filterAuftragsListe()">Search</button>
+                <input type="search" style="height: 37px;margin-right: 2px" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="search" (input)="searchAuftragsListe()" />
+                <button mat-raised-button style="background: #50208d; color: white" type="button" (click)="filterAuftragsListe()">Search</button>
               </div>
             </mat-card-title>
           </div>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
             <!-- Schleife durch die auftragsListe und Anzeige der Daten -->
-            <tr *ngFor="let auftrag of (filteredAuftragsListe.length > 0 ? filteredAuftragsListe : auftragsListe)">
+            <tr *ngFor="let auftrag of paginatedAuftragsListe">
 
               <td class="text-center align-content-center">{{ auftrag.auftragsnummer }}</td>
               <td class="text-center">
@@ -71,7 +71,7 @@
                 </button>
                 <mat-menu #menu="matMenu">
 
-                  <button mat-menu-item>
+                  <button mat-menu-item (click)="openDetailsDialog(auftrag)">
                     <mat-icon style="text-align: center !important;" class="fa-solid fa-circle-info" color="primary"></mat-icon>
                     <span>Details</span>
                   </button>
@@ -90,7 +90,13 @@
           </table>
 
         </mat-card-actions>
-        <mat-paginator showFirstLastButtons  [pageSizeOptions]="[5, 10, 20]" aria-label="Select page" (page)="changePage($event)">
+        <mat-paginator
+          showFirstLastButtons
+          [length]="filteredAuftragsListe.length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 20]"
+          aria-label="Select page"
+          (page)="changePage($event)">
         </mat-paginator>
       </mat-card>
     </div>

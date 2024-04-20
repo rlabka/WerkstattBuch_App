@@ -23,7 +23,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {HttpClient, HttpClientModule, provideHttpClient} from "@angular/common/http";
+import {HttpClient, HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatOption, ShowOnDirtyErrorStateMatcher} from "@angular/material/core";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
@@ -133,7 +133,8 @@ import { RechnungComponent } from './component/rechnung/rechnung.component';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'de' }
+    { provide: MAT_DATE_LOCALE, useValue: 'de' },
+    provideHttpClient(withFetch()), provideClientHydration()
   ],
   bootstrap: [AppComponent],
 

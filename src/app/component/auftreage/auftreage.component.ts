@@ -1,11 +1,12 @@
-import {Component, Inject, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, Output, ViewChild} from '@angular/core';
 import {AuftragService} from "../../service/AuftragService";
 import {Auftrag} from "../../interface/Auftrag";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {DetailsDialogComponent} from "../details-dialog/details-dialog.component";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {interval, Subscription, switchMap} from "rxjs";
-import EventEmitter from "node:events";
+import {catchError, interval, Subscription, switchMap, tap} from "rxjs";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+
 
 
 @Component({
@@ -19,40 +20,24 @@ export class AuftreageComponent {
   auftragsListe: any[] = [];
   filteredAuftragsListe: any[] = [];
   searchTerm: string = '';
-  private updateSubscription: Subscription;
+  updateSubscription: Subscription | undefined;
 
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
-
-
-  constructor(private auftragService: AuftragService, public dialog: MatDialog) {
+  constructor(private auftragService: AuftragService, public dialog: MatDialog, private route: ActivatedRoute,private router: Router) {
     this.getAllAusstehendeAuftrags();
+  }
+  isInitialized = false;
 
-    let previousAuftragsListe: any[] = [];
+  ngOnInit(): void {
+    this.fetchupdate();
+    //this.filterAuftragsListe();
+  }
 
-    this.updateSubscription = interval(5000)
-      .pipe(
-        switchMap(() => this.auftragService.getAll())
-      )
-      .subscribe(
-        (data: any[]) => {
-          const newAuftragsListe = data.filter(auftrag => auftrag.status === 'Ausstehend');
-
-          // Überprüfe, ob sich die Daten geändert haben
-          if (this.hasChanges(previousAuftragsListe, newAuftragsListe)) {
-            this.auftragsListe = newAuftragsListe;
-            this.filteredAuftragsListe = [...this.auftragsListe];
-          }
-
-          // Aktualisiere die vorherige Liste
-          previousAuftragsListe = newAuftragsListe;
-        },
-        error => {
-          console.log('Fehler beim Abrufen der ausstehenden Aufträge:', error);
-        }
-      );
+  ngAfterViewInit(): void {
+    //this.getAllAusstehendeAuftrags();
   }
 
 // Überprüfe, ob sich die Listen geändert haben
+  private button1Enabled: boolean=true;
   private hasChanges(previousList: any[], newList: any[]): boolean {
     if (previousList.length !== newList.length) {
       return true;
@@ -67,9 +52,22 @@ export class AuftreageComponent {
     return false;
   }
 
-  ngOnInit(): void {
+  fetchupdate(){
+    this.updateSubscription = interval(1000).pipe(
+      switchMap(() => this.auftragService.getOutstandingAuftrags()),
+      tap((data: any[]) => {
+        const newAuftragsListe = data.filter(auftrag => auftrag.status === 'Ausstehend');
 
-
+        if (this.hasChanges(this.auftragsListe, newAuftragsListe)) {
+          this.auftragsListe = newAuftragsListe;
+          this.filteredAuftragsListe = [...this.auftragsListe];
+        }
+      }),
+      catchError(error => {
+        console.error('Polling error:', error);
+        return [];
+      })
+    ).subscribe();
   }
 
   getAllAusstehendeAuftrags() {
@@ -79,7 +77,7 @@ export class AuftreageComponent {
       },
       error => {
         console.log('Fehler beim Abrufen der ausstehenden Aufträge:', error);
-      }
+      },
     );
   }
 
@@ -107,18 +105,25 @@ export class AuftreageComponent {
 
       width: '550px',
       maxHeight: '700px',
-      data: auftrag,
+      data: {auftrag, button1Enabled:true},
       autoFocus: false
     });
 
     dialogRef.componentInstance.dialogClosed.subscribe(() => {
-      this.getAllAusstehendeAuftrags();
+      this.fetchupdate();
     });
   }
 
+  ngOnDestroy(): void {
+    // Beende den Observer
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
+    }
+    this.isInitialized = true;
+  }
 
   currentPage = 0;
-  pageSize = 1;
+  pageSize = 5;
 
   get paginatedAuftragsListe() {
     const start = this.currentPage * this.pageSize;

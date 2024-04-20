@@ -13,9 +13,9 @@
     </div>
     <div class="">
       <ul class="list-group list-group-light list-group-big">
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftragsnummer }}</span></li>
-        <li style="color: black" class="list-group-item px-3"><span>{{ formatTimestamp(data.timestamp)}}</span></li>
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.auswahl }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.auftragsnummer }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ formatTimestamp(data.auftrag.timestamp)}}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.auswahl }}</span></li>
       </ul>
     </div>
   </div>
@@ -32,19 +32,19 @@
         <li style="color: #6e6e6e; font-weight: bold" class="list-group-item px-3">Telefon</li>
         <li style="color: #6e6e6e; font-weight: bold" class="list-group-item px-3">E-Mail</li>
         <li style="color: #6e6e6e; font-weight: bold" class="list-group-item px-3">Adresse</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.kundeinformationen.hausnummer" class="list-group-item px-3">Hausnummer</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.kundeinformationen.plz" class="list-group-item px-3">PLZ</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.kundeinformationen.stadt" class="list-group-item px-3">Stadt</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.kundeinformationen.hausnummer" class="list-group-item px-3">Hausnummer</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.kundeinformationen.plz" class="list-group-item px-3">PLZ</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.kundeinformationen.stadt" class="list-group-item px-3">Stadt</li>
       </ul>
     </div>
     <div class="">
       <ul class="list-group list-group-light list-group-big">
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.firstName }}</span></li>
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.lastName }}</span></li>
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.tel }}</span></li>
-        <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.email }}</span></li>
-        @if (data.kundeinformationen.stadt){
-          <li style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.adresse }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.firstName }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.lastName }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.tel }}</span></li>
+        <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.email }}</span></li>
+        @if (data.auftrag.kundeinformationen.stadt){
+          <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.adresse }}</span></li>
         } @else {
           <li style="color: black" class="list-group-item px-3">
             <button mat-icon-button (click)="openLinkInNewTab()">
@@ -53,9 +53,9 @@
           </li>
         }
 
-        <li *ngIf="data.kundeinformationen.hausnummer" style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.hausnummer }}</span></li>
-        <li *ngIf="data.kundeinformationen.plz " style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.plz }}</span></li>
-        <li *ngIf="data.kundeinformationen.stadt" style="color: black" class="list-group-item px-3"><span>{{ data.kundeinformationen.stadt }}</span></li>
+        <li *ngIf="data.auftrag.kundeinformationen.hausnummer" style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.hausnummer }}</span></li>
+        <li *ngIf="data.auftrag.kundeinformationen.plz " style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.plz }}</span></li>
+        <li *ngIf="data.auftrag.kundeinformationen.stadt" style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.kundeinformationen.stadt }}</span></li>
       </ul>
     </div>
   </div>
@@ -68,25 +68,25 @@
       <ul class="list-group list-group-light list-group-big ">
         <li style="color: #6e6e6e; font-weight: bold" class="list-group-item px-3">Automarke</li>
         <li style="color: #6e6e6e; font-weight: bold" class="list-group-item px-3">Fahrzeugtyp</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.autoinformationen.reifengroesse" class="list-group-item px-3">Reifengröße</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Radgröße</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Räderart</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="!data.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Reifen</li>
-        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Rädern</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.autoinformationen.reifengroesse" class="list-group-item px-3">Reifengröße</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.autoinformationen.radgroesse" class="list-group-item px-3">Radgröße</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.autoinformationen.radgroesse" class="list-group-item px-3">Räderart</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="!data.auftrag.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Reifen</li>
+        <li style="color: #6e6e6e; font-weight: bold" *ngIf="data.auftrag.autoinformationen.radgroesse" class="list-group-item px-3">Anzahl Rädern</li>
       </ul>
     </div>
     <div class="">
       <ul class="list-group list-group-light list-group-big">
-        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.automarke }}</span></li>
-        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.fahrzeugtyp }}</span></li>
-        @if (data.autoinformationen.radgroesse){
-          <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.radgroesse }}</span></li>
-          <li class="list-group-item px-3"><span>{{ data.autoinformationen.raederart }}</span></li>
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.automarke }}</span></li>
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.fahrzeugtyp }}</span></li>
+        @if (data.auftrag.autoinformationen.radgroesse){
+          <li  style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.radgroesse }}</span></li>
+          <li class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.raederart }}</span></li>
         }
-        @if (data.autoinformationen.reifengroesse){
-          <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.reifengroesse }}</span></li>
+        @if (data.auftrag.autoinformationen.reifengroesse){
+          <li  style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.reifengroesse }}</span></li>
         }
-        <li  style="color: black" class="list-group-item px-3"><span>{{ data.autoinformationen.anzahlreifen }}</span></li>
+        <li  style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.autoinformationen.anzahlreifen }}</span></li>
       </ul>
     </div>
   </div>
@@ -104,23 +104,28 @@
         </div>
         <div class="">
           <ul class="list-group list-group-light list-group-big">
-            <li style="color: black" class="list-group-item px-3"><span>{{ formatDate(data.termin.termindatum) }}</span></li>
-            <li style="color: black" class="list-group-item px-3"><span>{{ data.termin.terminuhrzeit }}</span></li>
+            <li style="color: black" class="list-group-item px-3"><span>{{ formatDate(data.auftrag.termin.termindatum) }}</span></li>
+            <li style="color: black" class="list-group-item px-3"><span>{{ data.auftrag.termin.terminuhrzeit }}</span></li>
           </ul>
         </div>
       </div>
     </div>
   <div class="card-body ">
     <div class="d-flex justify-content-between">
-      <button mat-raised-button color="primary" style="background-color: #0aa348 !important;" class="card-link" (click)="confirmOrder()">
+      <button *ngIf="data.button1Enabled" mat-raised-button color="primary" style="background-color: #0aa348 !important;" class="card-link" (click)="confirmOrder()">
         <mat-icon style="overflow: visible !important;" class="fa-regular fa-circle-check"></mat-icon>
         Bestätigen
       </button>
 
-      <button mat-raised-button color="primary" style="background-color: #da1313 !important;" class="card-link" (click)="declineOrder()">
+      <button *ngIf="data.button1Enabled" mat-raised-button color="primary" style="background-color: #da1313 !important;" class="card-link" (click)="declineOrder()">
         <mat-icon style="overflow: visible !important;" class="fa-solid fa-ban"></mat-icon>
         Ablehnen
       </button>
+      <button *ngIf="!data.button1Enabled" mat-raised-button color="primary" style="background-color: #3958bd !important;" class="card-link" (click)="close()">
+        <mat-icon style="overflow: visible !important;" class="fa-regular fa-circle-xmark"></mat-icon>
+        Schließen
+      </button>
+
     </div>
   </div>
 </div>
