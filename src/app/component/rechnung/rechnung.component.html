@@ -9,9 +9,17 @@
         Autoverwertung Majouno - Maarstr. 40 53227 Bonn<br>
       </div>
       <br>
-      AMW Wenting<br>
-      Handelsweg 11<br>
-      7021BZ Zelhem Niederland
+      {{data.kundeinformationen.firstName}} {{data.kundeinformationen.lastName}}<br>
+      <span *ngIf="data.kundeinformationen.plz">
+        {{ data.kundeinformationen.adresse }} {{ data.kundeinformationen.hausnummer }}<br>
+        {{ data.kundeinformationen.plz }} {{ data.kundeinformationen.stadt }}
+      </span>
+      <span *ngIf="turnoff">
+        <input type="text" placeholder="Adresse eingeben" [(ngModel)]="adresse.strasse">
+        <input type="text" placeholder="Hausnummer eingeben" [(ngModel)]="adresse.hsnr">
+        <input type="text" placeholder="PLZ eingeben" [(ngModel)]="adresse.plz">
+        <input type="text" placeholder="Stadt eingeben" [(ngModel)]="adresse.stadt">
+      </span>
     </div>
 
     <div class="col-md-6 text-end">
@@ -36,11 +44,11 @@
     </div>
     <!-- Rechnungsdetails -->
     <div class="col-md-4 mb-3">
-      Kunde Nr.: 1160<br>
+      Auftrag Nr.: {{ data.auftragsnummer }}<br>
     </div>
     <!-- Rechnungsdetails -->
     <div class="col-md-4 mb-3">
-      Datum: 01.11.2022
+      Datum: {{ data.timestamp | date:'yyyy-MM-dd' }}
     </div>
   </div>
   <hr class="border-bottom">
@@ -50,21 +58,73 @@
     <thead style="background: #da1313">
     <tr >
       <th style="color: white" scope="col">Pos</th>
-      <th style="color: white" scope="col" colspan="3">Leistung</th>
+      <th style="color: white" scope="col" colspan="4">Leistung</th>
       <th style="color: white" scope="col">MwSt</th>
       <th style="color: white" scope="col">Einzelpreis</th>
       <th style="color: white" scope="col">Anzahl</th>
       <th style="color: white" scope="col">Gesamtpreis</th>
+      <th style="color: white" scope="col"></th> <!-- Platz für den Button zum Entfernen des Artikels -->
     </tr>
     </thead>
     <tbody>
-    <!-- Tabelleninhalte hier einfügen -->
+    <tr *ngFor="let artikel of data.artikelListe; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td colspan="4">
+        <input type="text" placeholder="Leistung eingeben" [(ngModel)]="artikel.leistung">
+      </td>
+      <td>
+        19%
+      </td>
+      <td>
+        <input style=" width:60px" type="number" placeholder="Einzelpreis eingeben" [(ngModel)]="artikel.einzelpreis"> Euro
+      </td>
+      <td>
+        <input style=" width:40px" type="number" placeholder="Anzahl eingeben" [(ngModel)]="artikel.anzahl"> Stück
+      </td>
+      <td>
+        {{artikel.gesamtpreis}} Euro
+      </td>
+      <td>
+        <button (click)="removeArtikel(i)">Entfernen</button>
+      </td>
+    </tr>
     </tbody>
   </table>
+  <hr class="border-bottom">
 
+  <div style="margin-left: 480px" class="col-md-6 text-start">
+    <!-- Empfängerinformationen -->
+    <div>
+      Nettobetrag: <br>
+      zzgl. 19% MwSt: <br>
+      <span style="font-weight: bold">
+        Gesamtbetrag: <br>
+      </span>
+    </div>
+  </div>
+
+  <!-- Button zum Hinzufügen eines neuen Artikels -->
+  <button (click)="addArtikel()">Neuen Artikel hinzufügen</button><br>
+  <hr class="border-bottom">
 
   <!-- Fußzeile -->
-  Majouno Autoverwertung<br/>
-  Märsche 40, 53227 Bonn<br/>
-  Tel.: 0228 / 46 87 80
+  <div class="row small">
+    <div class="col-md-4 text-start">
+      Majouno Autoverwertung<br/>
+      Märsche 40,<br/> 53227 Bonn
+    </div>
+    <div class="col-md-4">
+      Tel.: 0228 460 780<br>
+      Mobil: 0170 327 937 9<br>
+      <a href="http://www.majouno-autoverwertung.de" class="text-light">www.majouno-autoverwertung.de</a><br>
+      <a href="mailto:info@majouno-autoverwertung.de" class="text-light">info&commat;majouno-autoverwertung.de</a>
+    </div>
+    <div class="col-md-4">
+      SparKasse Köln/Bonn<br>
+      IBAN: DE55 3705 0198 0000 0118 41<br>
+      Kontoinhaber:Hasan Majouno<br>
+      USt-IdNr, DE177827357<br>
+      Finanzammt: Bonn Außenstadt
+    </div>
+  </div>
 </div>

@@ -33,7 +33,7 @@ export class StepperComponent {
   termin!: FormGroup;
 
   stepperOrientation: any;
-  isLinear= true;
+  isLinear= false;
   option1: any;
   option2: any;
   currentTime:Date;
@@ -85,11 +85,14 @@ export class StepperComponent {
       auswahl: ['', Validators.required]
     });
     this.autoinformationen = this.formBuilder.group({
-      automarke: ['',Validators.required],
+      automarkeTeil1: ['',Validators.required],
+      automarkeTeil2: ['',Validators.required],
+      automarkeTeil3: ['',Validators.required],
       fahrzeugtyp: ['',Validators.required],
       reifengroesse: ['',Validators.required],
       radgroesse: ['',Validators.required],
       raederart: ['',Validators.required],
+      lastindex: ['', Validators.required],
       anzahlreifen: [1]
     });
 
@@ -140,14 +143,20 @@ export class StepperComponent {
 
     const auftrag: Auftrag = {
       kundeinformationen: this.kundeinformationen.value,
-      autoinformationen: this.autoinformationen.value,
+      autoinformationen: {
+        automarke: `${this.autoinformationen.get('automarkeTeil1')?.value ?? ''} ${this.autoinformationen.get('automarkeTeil2')?.value ?? ''} ${this.autoinformationen.get('automarkeTeil3')?.value ?? ''}`,
+        fahrzeugtyp: this.autoinformationen.get('fahrzeugtyp')?.value ?? '',
+        reifengroesse: this.autoinformationen.get('reifengroesse')?.value ?? '',
+        radgroesse: this.autoinformationen.get('radgroesse')?.value ?? '',
+        raederart: this.autoinformationen.get('raederart')?.value ?? '',
+        anzahlreifen: this.autoinformationen.get('anzahlreifen')?.value ?? 1
+      },
       timestamp: new Date(),
       termin: {
-        termindatum: this.termin.get('termindatum')?.value.toLocaleString(),
-        terminuhrzeit: this.termin.get('terminuhrzeit')?.value,
+        termindatum: this.termin.get('termindatum')?.value?.toLocaleString() ?? '',
+        terminuhrzeit: this.termin.get('terminuhrzeit')?.value ?? '',
       }
     };
-
     // Auftrag an das Backend senden
     this.auftragservice.saveAuftrag(auftrag).subscribe((response) => {
       Swal.fire({

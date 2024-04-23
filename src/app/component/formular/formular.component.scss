@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background: rgba(255, 235, 238, 0.62) no-repeat;
+  background: rgba(255, 249, 250, 0.62) no-repeat;
 
   --mdc-filled-text-field-container-color: white;
   --mat-form-field-subscript-text-size: 0.8rem;
@@ -34,8 +34,8 @@ body {
   color: black ;
 }
 .header{
-  height: 12rem; width: auto;
-  background-color: #DC143C !important;
+  height: 8rem; width: auto;
+  background-color: rgb(222,43,33) !important;
 }
 .text-border{
   font-family: 'Madimi One',sans-serif; font-style: normal;
@@ -70,6 +70,16 @@ body {
   border-top-right-radius: 8px;
   background-color: rgb(218, 19, 24); /* Farbe des oberen Teils */
 }
+.coll-mitte{
+  content: "";
+  width: 60rem;
+  position: absolute;
+  height: 15px;
+  padding: 0 20px 0 20px !important;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: rgb(218, 19, 24); /* Farbe des oberen Teils */
+}
 .img{
   transform: scale(3);
   font-weight: bold;
@@ -77,6 +87,12 @@ body {
 }
 .input{
   margin-top: 1rem;
+}
+
+@media screen and (min-width: 900px) {
+.mylogo{
+  margin-left: 120px;
+}
 }
 @media screen and (max-width: 800px) {
   .beschreibung{

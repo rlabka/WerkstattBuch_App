@@ -62,6 +62,7 @@ export class HistoryComponent {
 
   currentPage = 0;
   pageSize = 5;
+  selected: any;
 
   get paginatedAuftragsListe() {
     const start = this.currentPage * this.pageSize;
