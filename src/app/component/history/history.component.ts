@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DetailsDialogComponent} from "../details-dialog/details-dialog.component";
 import {PageEvent} from "@angular/material/paginator";
 import {RechnungComponent} from "../rechnung/rechnung.component";
+import {MatChipListboxChange} from "@angular/material/chips";
 
 @Component({
   selector: 'app-history',
@@ -16,7 +17,8 @@ export class HistoryComponent {
   filteredAuftragsListe: any[] = [];
   search: string = '';
   //@ViewChild(MatPaginator) paginator: MatPaginator;
-
+  confirmedFilter: boolean = false;
+  declinedFilter: boolean = false;
 
   constructor(private auftragService: AuftragService, public dialog: MatDialog) {
     this.getAllAusstehendeAuftrags();
@@ -47,17 +49,26 @@ export class HistoryComponent {
   }
 
   filterAuftragsListe() {
-    if (!this.search) {
+    if (!this.search && !this.confirmedFilter && !this.declinedFilter) {
+      // Wenn keine Filter ausgewählt sind, zeige die gesamte Liste an
       this.filteredAuftragsListe = [...this.auftragsListe];
       return;
     }
+
     const searchTermLower = this.search.toLowerCase();
-    this.filteredAuftragsListe = this.auftragsListe.filter(auftrag =>
-      auftrag.auftragsnummer.toString().toLowerCase().includes(searchTermLower) ||
-      auftrag.kundeinformationen.firstName.toLowerCase().includes(searchTermLower) ||
-      auftrag.kundeinformationen.lastName.toLowerCase().includes(searchTermLower)
-    );
+
+    this.filteredAuftragsListe = this.auftragsListe.filter(auftrag => {
+      // Filterbedingungen für die Suche
+      const matchesSearch = !this.search || (
+        auftrag.auftragsnummer.toString().toLowerCase().includes(searchTermLower) ||
+        auftrag.kundeinformationen.firstName.toLowerCase().includes(searchTermLower) ||
+        auftrag.kundeinformationen.lastName.toLowerCase().includes(searchTermLower) ||
+        (auftrag.kundeinformationen.email && auftrag.kundeinformationen.email.toLowerCase().includes(searchTermLower))
+      );
+    });
   }
+
+
 
 
   currentPage = 0;
@@ -121,5 +132,20 @@ export class HistoryComponent {
       autoFocus: false
     });
 
+  }
+
+  onSelectionChange($event: MatChipListboxChange) {
+    if ($event.value === 'confirmed') {
+      this.filteredAuftragsListe = this.auftragsListe.filter(auftrag => {
+        return auftrag.status==='bestätigt';
+      });
+    } else if ($event.value === 'declined') {
+      this.filteredAuftragsListe = this.auftragsListe.filter(auftrag => {
+        return auftrag.status==='abgelehnt';
+      });
+    }
+    else {
+      this.filterAuftragsListe();
+    }
   }
 }

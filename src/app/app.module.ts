@@ -63,6 +63,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatBadge} from "@angular/material/badge";
 import { HistoryComponent } from './component/history/history.component';
 import { RechnungComponent } from './component/rechnung/rechnung.component';
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 
 @NgModule({
 
@@ -129,7 +130,9 @@ import { RechnungComponent } from './component/rechnung/rechnung.component';
     MdbTooltipModule,
     MdbValidationModule,
     MatPaginator,
-    MatBadge
+    MatBadge,
+    MatButtonToggle,
+    MatButtonToggleGroup
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
