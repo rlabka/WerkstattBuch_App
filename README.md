@@ -1,27 +1,86 @@
-# ServicesMayono
+# WerkstattBuch_App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+**WerkstattBuch** ist ein **privates Projekt** zur Entwicklung eines benutzerfreundlichen Werkstatt-Terminvereinbarungssystems. 
 
-## Development server
+Dieses System ermöglicht es Werkstätten, ihre Terminbuchungen effizienter zu verwalten und die Anzahl der telefonischen Anfragen zu reduzieren. Durch die Implementierung eines Online-Terminbuchungsformulars wird der Buchungsprozess für Kunden und Mitarbeiter vereinfacht.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Erfolge:**
 
-## Code scaffolding
+* Reduzierung der telefonischen Anfragen um 30%.
+* Effizientere Terminvereinbarung für Kunden und Mitarbeiter.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Kernfunktionen:**
 
-## Build
+* **Online-Terminbuchungsformular:** Kunden können bequem online Termine buchen.
+* **Mitarbeiter-Panel:** Verwaltung von Kundenaufträgen und Rechnungen.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Funktionen
 
-## Running unit tests
+* **Zentrale Auftragsübersicht:**
+    *  Übersichtliche Darstellung aller Aufträge.
+    *  Filtern nach Status (neu, fertiggestellt, alle).
+    *  Zugriff auf Kundendaten (Name, Adresse, Telefonnummer).
+    *  Bearbeiten von Auftragsdetails und Statusänderungen.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* **Effiziente Auftragsbearbeitung:**
+    *  Erstellen von Rechnungen mit detaillierter Auflistung der Leistungen, Preisen und Mehrwertsteuer.
+    *  Drucken und Versenden von Rechnungen direkt aus der App.
 
-## Running end-to-end tests
+## Screenshots
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Auftragsübersicht](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/auftragsuebersicht1.png)
 
-## Further help
+![terminauswahl](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/terminauswahl.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![auftragssendung](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/auftragssendung.png) 
+
+![neue_auftraege](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/neue_auftrage.png)
+
+![rechnung1.png](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/rechnung1.png)
+
+![rechnung2.png](https://github.com/rlabka/WerkstattBuch_App/blob/main/Screenshots/rechnung2.png)
+
+
+
+
+
+## Technologie
+
+* **Frontend:** 
+    * Angular CLI (Version 17.2.3)
+    * Angular Material
+    * Bootstrap 
+    * FontAwesome
+
+* **Backend:** Spring Boot (https://github.com/rlabka/WerkstattBuch_Backend)
+
+* **Zusätzliche Bibliotheken:** 
+    * Chart.js
+    * html2canvas
+    * html2pdf
+    * SweetAlert2
+
+
+## Entwicklung
+
+### Entwicklungsserver starten
+
+Führe `ng serve` aus, um den Entwicklungsserver zu starten. Öffne deinen Browser und navigiere zu `http://localhost:4200/`. Die Anwendung wird automatisch neu geladen, wenn du Änderungen an den Quelldateien vornimmst.
+
+### Code generieren
+
+Verwende `ng generate component component-name`, um eine neue Komponente zu generieren. Du kannst auch `ng generate directive|pipe|service|class|guard|interface|enum|module` verwenden.
+
+### Build
+
+Führe `ng build` aus, um das Projekt zu bauen. Die Build-Artefakte werden im Verzeichnis `dist/` gespeichert.
+
+### End-to-End-Tests ausführen
+
+Führe `ng e2e` aus, um die End-to-End-Tests über eine Plattform deiner Wahl auszuführen. Um diesen Befehl zu verwenden, musst du zunächst ein Paket hinzufügen, das End-to-End-Testfunktionen implementiert.
+
+
+
+## Kontakt
+
+Bei Fragen oder Problemen können Sie gerne ein Issue in diesem Repository erstellen.
