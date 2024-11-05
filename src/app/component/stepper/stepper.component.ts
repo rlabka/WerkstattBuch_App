@@ -155,7 +155,8 @@ export class StepperComponent {
       termin: {
         termindatum: this.termin.get('termindatum')?.value?.toLocaleString() ?? '',
         terminuhrzeit: this.termin.get('terminuhrzeit')?.value ?? '',
-      }
+      },
+      status: 'Ausstehend'
     };
     // Auftrag an das Backend senden
     this.auftragservice.saveAuftrag(auftrag).subscribe((response) => {

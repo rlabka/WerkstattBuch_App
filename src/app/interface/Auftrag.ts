@@ -19,6 +19,7 @@ export interface Auftrag {
     anzahlreifen: number;
   };
   timestamp: Date;
+  status: string;
   termin: {
     termindatum: string;
     terminuhrzeit: string;
